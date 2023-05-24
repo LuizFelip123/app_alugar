@@ -67,7 +67,8 @@ class CustomDrawer extends StatelessWidget {
                             padding: const EdgeInsets.all(8.0),
                             child: GestureDetector(
                               onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginScreen()));
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => LoginScreen()));
                               },
                               child: Text(
                                 "Cadastre-se ou entre na sua conta",
@@ -85,12 +86,31 @@ class CustomDrawer extends StatelessWidget {
               ),
               Divider(),
               DrawerTile(
-                  icon: Icons.home,
-                  text: "Início",
-                  pageController: pageController,
-                  page: 0),
+                icon: Icons.home,
+                text: "Início",
+                pageController: pageController,
+                page: 0,
+              ),
+              DrawerTile(
+                icon: Icons.person_pin_circle_outlined,
+                text: "Alugel Compartilhado",
+                pageController: pageController,
+                page: 1,
+              ),
+              DrawerTile(
+                icon: Icons.apartment,
+                text: "Alugel",
+                pageController: pageController,
+                page: 1,
+              ),
+               DrawerTile(
+                icon: Icons.output,
+                text: "Sair",
+                pageController: pageController,
+                page: 1,
+              ),
             ],
-          )
+          ),
         ],
       ),
     );
