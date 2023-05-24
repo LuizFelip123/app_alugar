@@ -7,7 +7,7 @@ class HouseListTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
   return CupertinoTabScaffold(
-
+      
       tabBar: CupertinoTabBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(

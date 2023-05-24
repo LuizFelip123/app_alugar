@@ -13,6 +13,7 @@ class HomeScreen extends StatelessWidget {
       physics: NeverScrollableScrollPhysics(),
       children: [
         Scaffold(
+          resizeToAvoidBottomInset: false,
           appBar: AppBar(
             title: Text(
               "Houses",
@@ -21,11 +22,11 @@ class HomeScreen extends StatelessWidget {
             centerTitle: true,
           ),
           body: HouseListTab(),
-          drawer: CustomDrawer(pageController: _pageController,),
+          drawer: CustomDrawer(
+            pageController: _pageController,
+          ),
         ),
-        Scaffold(
-          
-        )
+        Scaffold()
       ],
     );
   }
