@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "603867787156",
+    "project_id": "tcc1-71526",
+    "storage_bucket": "tcc1-71526.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:603867787156:android:975f2643454af03ea2e981",
+        "android_client_info": {
+          "package_name": "com.example.app_alugar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0XttDUixzJ8C6dAQ76G-9pA7-2vs_bWk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

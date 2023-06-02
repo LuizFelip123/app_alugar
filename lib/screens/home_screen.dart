@@ -1,4 +1,5 @@
 import 'package:app_alugar/screens/tabs/house_list_tab.dart';
+import 'package:app_alugar/screens/user_screen.dart';
 import 'package:app_alugar/screens/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,17 @@ class HomeScreen extends StatelessWidget {
             pageController: _pageController,
           ),
         ),
-        Scaffold()
+        Scaffold(
+          appBar: AppBar(
+            title: Text(
+              "Tela Usuário",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            centerTitle: true,
+          ),
+          body: UserScreen(),
+          drawer: CustomDrawer(pageController: _pageController),
+        )
       ],
     );
   }
