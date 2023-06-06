@@ -137,7 +137,7 @@ class UserScreen extends StatelessWidget {
                             size: 25,
                           ),
                           Text(
-                            "Cadastrar Casas",
+                            "users interessados",
                             style: TextStyle(
                                 color: Colors.white, fontWeight: FontWeight.bold),
                           ),

@@ -1,7 +1,7 @@
+import 'package:app_alugar/controllers/localizacao_controller.dart';
 import 'package:app_alugar/models/house_model.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:estados_municipios/estados_municipios.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class HouseRegisterScreen extends StatefulWidget {
@@ -15,7 +15,7 @@ class _HouseRegisterScreenState extends State<HouseRegisterScreen> {
   bool? shareHouse = false;
   List? _estados;
   List? _cidades;
-  final controller = EstadosMunicipiosController();
+  final controller = LocalizacaoController();
   String selectedValue = "Ambos Gênero";
   String selectedEstado = "Nenhum";
   String selectedCidade = "Nenhum";
@@ -38,7 +38,7 @@ class _HouseRegisterScreenState extends State<HouseRegisterScreen> {
   void initState() {
     // TODO: implement initState
 
-    controller.buscaTodosEstados().then((value) {
+    controller.getStates().then((value) {
       _estados = value;
       for (int i = 0; i < _estados!.length; i++) {
         menuEstados.add(DropdownMenuItem(
@@ -90,7 +90,7 @@ class _HouseRegisterScreenState extends State<HouseRegisterScreen> {
                                 selectedCidade = "Nenhum";
                               });
                               final cidades = await controller
-                                  .buscaMunicipiosPorEstado(selectedEstado);
+                                  .getCitysForStats(selectedEstado);
                               await _initCidade(cidades);
                               setState(() {
                                 menuCidade;
