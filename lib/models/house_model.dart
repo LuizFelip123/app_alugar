@@ -14,15 +14,25 @@ class HouseModel extends Model {
   String? _estado;
   String? get descricao => _descricao;
   List<File> _imgsFile = [];
-
+  List<String> _imgsLink = [];
+  Map<String, dynamic> _houseData = {};
+  HouseModel() {}
+  HouseModel.fromSnapshot(DocumentSnapshot snapshot) {
+    _cidade = snapshot['cidade'];
+    _descricao = snapshot['decricao'];
+    _estado = snapshot['estado'];
+    _valor = double.parse(snapshot['valor']);
+    for (String imgs in snapshot["imagens"]) {
+      _imgsLink.add(imgs);
+    }
+  }
   double? get valor => _valor;
 
   String? get cidade => _cidade;
   String? get estado => _estado;
-  Map<String, dynamic> _houseData = {};
   List<File> get imgsFile => _imgsFile;
   Map<String, dynamic> get houseData => _houseData;
-
+  List<String> get imgsLink => _imgsLink;
   static HouseModel of(BuildContext context) =>
       ScopedModel.of<HouseModel>(context);
 

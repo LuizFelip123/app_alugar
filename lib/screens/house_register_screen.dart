@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:app_alugar/controllers/localizacao_controller.dart';
 import 'package:app_alugar/models/house_model.dart';
 import 'package:flutter/material.dart';

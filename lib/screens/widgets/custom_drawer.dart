@@ -8,8 +8,7 @@ class CustomDrawer extends StatelessWidget {
   final pageController;
   CustomDrawer({required this.pageController});
   Widget _buildDrawerBack() => Container(
-        
-      color: Colors.black,
+        color: Colors.black,
       );
   @override
   Widget build(BuildContext context) {
@@ -52,7 +51,7 @@ class CustomDrawer extends StatelessWidget {
                               Padding(
                                   padding: EdgeInsets.only(left: 8.0),
                                   child: Text(
-                                     "Olá, ${model.isLoggedIn()? model.userData['name']: "" }",
+                                    "Olá, ${model.isLoggedIn() ? model.userData['name'] : ""}",
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
@@ -62,17 +61,19 @@ class CustomDrawer extends StatelessWidget {
                                 padding: const EdgeInsets.all(8.0),
                                 child: GestureDetector(
                                   onTap: () {
-                                    if(!model.isLoggedIn()){
+                                    if (!model.isLoggedIn()) {
                                       Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                LoginScreen()));
-                                    }else{
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  LoginScreen()));
+                                    } else {
                                       model.signOut();
                                     }
                                   },
                                   child: Text(
-                                    !model.isLoggedIn()?"Cadastre-se ou entre na sua conta": "Sair",
+                                    !model.isLoggedIn()
+                                        ? "Cadastre-se ou entre na sua conta"
+                                        : "Sair",
                                     style: TextStyle(
                                       color: Colors.white,
                                     ),
@@ -92,7 +93,12 @@ class CustomDrawer extends StatelessWidget {
                     pageController: pageController,
                     page: 0,
                   ),
-                  DrawerTile(icon: Icons.assignment_ind, text: "Meu Perfil", pageController: pageController, page: 2),
+                  DrawerTile(
+                    icon: Icons.assignment_ind,
+                    text: "Meu Perfil",
+                    pageController: pageController,
+                    page: 1,
+                  ),
                   DrawerTile(
                     icon: Icons.person_pin_circle_outlined,
                     text: "Aluguel Compartilhado",

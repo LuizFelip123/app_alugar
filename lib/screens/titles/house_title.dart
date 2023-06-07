@@ -1,7 +1,10 @@
+import 'package:app_alugar/models/house_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HouseTitle extends StatelessWidget {
+ final HouseModel _houseModel;
+  HouseTitle(this._houseModel);
   @override
   Widget build(BuildContext context) {
     final row = SafeArea(
@@ -19,7 +22,7 @@ class HouseTitle extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(4),
             child: Image.network(
-              "https://www.maahsareiaebrita.com.br/wp-content/uploads/2020/02/asiatica.jpg",
+             _houseModel.imgsLink[0],
               fit: BoxFit.cover,
               width: 76,
               height: 76,
@@ -32,15 +35,15 @@ class HouseTitle extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
+                 const Text(
                     "Casa",
-                    style: TextStyle(fontSize: 18, color: Colors.grey, fontWeight: FontWeight.bold),
+                    style:  TextStyle(fontSize: 18, color: Colors.grey, fontWeight: FontWeight.bold),
 
                   ),
-                  Text("Em Santo Antônio de Jesus"),
+                  Text(_houseModel.cidade!),
                   const Padding(padding: EdgeInsets.only(top: 6)),
                   Text(
-                    'R\$ 250,00',
+                    'R\$ ${_houseModel.valor!.toStringAsFixed(2)}',
                   )
                 ],
               ),

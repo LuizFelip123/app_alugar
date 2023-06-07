@@ -65,7 +65,8 @@ class _SignupScreenState extends State<SignupScreen> {
                         },
                         child: Text(
                           "Cadastrar",
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16),
                         ),
                         style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
@@ -179,8 +180,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
   void _onSuccess() {
     Navigator.of(context).pop();
-        Navigator.of(context).pop();
-
+    Navigator.of(context).pop();
+ 
   }
 
   void _onFail() {
