@@ -73,7 +73,7 @@ class CustomDrawer extends StatelessWidget {
                                   child: Text(
                                     !model.isLoggedIn()
                                         ? "Cadastre-se ou entre na sua conta"
-                                        : "Sair",
+                                        : "",
                                     style: TextStyle(
                                       color: Colors.white,
                                     ),
@@ -111,12 +111,14 @@ class CustomDrawer extends StatelessWidget {
                     pageController: pageController,
                     page: 1,
                   ),
-                  DrawerTile(
-                    icon: Icons.output,
-                    text: "Sair",
-                    pageController: pageController,
-                    page: 1,
-                  ),
+                  model.isLoggedIn()
+                      ? DrawerTile(
+                          icon: Icons.output,
+                          text: "Sair",
+                          pageController: pageController,
+                          page: 2,
+                        )
+                      : Container(),
                 ],
               );
             },

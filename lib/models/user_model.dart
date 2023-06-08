@@ -77,7 +77,10 @@ class UserModel extends Model {
     _user = null;
     notifyListeners();
   }
-
+  String uid(){
+    return _user!.uid;
+  }
+  
   Future _saveUserData(Map<String, dynamic> userData) async {
     this.userData = userData;
     await FirebaseFirestore.instance

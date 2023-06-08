@@ -1,3 +1,4 @@
+import 'package:app_alugar/screens/house_screen.dart';
 import 'package:app_alugar/screens/tabs/house_list_tab.dart';
 import 'package:app_alugar/screens/user_screen.dart';
 import 'package:app_alugar/screens/widgets/custom_drawer.dart';
@@ -37,7 +38,8 @@ class HomeScreen extends StatelessWidget {
           ),
           body: UserScreen(),
           drawer: CustomDrawer(pageController: _pageController),
-        )
+        ),
+      
       ],
     );
   }

@@ -23,9 +23,12 @@ class DrawerTile extends StatelessWidget {
           height: 60.0,
           child: Row(
             children: [
-              Icon(icon, size: 32, color: Colors.white),
+              Padding(
+                padding: EdgeInsets.only(left: 10),
+                child: Icon(icon, size: 32, color: Colors.white),
+              ),
               SizedBox(
-                width: 32.0,
+                width: 20.0,
               ),
               Text(
                 text,

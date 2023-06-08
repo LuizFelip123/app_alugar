@@ -19,7 +19,7 @@ class HouseModel extends Model {
   HouseModel() {}
   HouseModel.fromSnapshot(DocumentSnapshot snapshot) {
     _cidade = snapshot['cidade'];
-    _descricao = snapshot['decricao'];
+    _descricao = snapshot['descricao'];
     _estado = snapshot['estado'];
     _valor = double.parse(snapshot['valor']);
     for (String imgs in snapshot["imagens"]) {
