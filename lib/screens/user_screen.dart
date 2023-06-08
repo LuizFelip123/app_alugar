@@ -3,9 +3,14 @@ import 'package:app_alugar/screens/house_register_screen.dart';
 import 'package:app_alugar/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
-class UserScreen extends StatelessWidget {
+class UserScreen extends StatefulWidget {
   const UserScreen({super.key});
 
+  @override
+  State<UserScreen> createState() => _UserScreenState();
+}
+
+class _UserScreenState extends State<UserScreen> {
   @override
   Widget build(BuildContext context) {
     return !UserModel.of(context).isLoggedIn()
@@ -33,8 +38,13 @@ class UserScreen extends StatelessWidget {
                 ),
                 ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => LoginScreen ()));
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(
+                              builder: (context) => LoginScreen()))
+                          .then((value) {
+                        setState(() {});
+                      });
+                      ;
                     },
                     child: Text(
                       "Login",
@@ -79,7 +89,7 @@ class UserScreen extends StatelessWidget {
                               gradient: LinearGradient(
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
-                                colors: [Color(0xFF58126b), Color(0xFFF6B2E1)],
+                                colors: [Color(0xFF58126b), Color(0xFFF9C3587)],
                               ),
                             ),
                             child: Center(
@@ -121,7 +131,7 @@ class UserScreen extends StatelessWidget {
                               gradient: LinearGradient(
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
-                                colors: [Color(0xFF58126b), Color(0xFFF6B2E1)],
+                                colors: [Color(0xFF58126b), Color(0xFFF9C3587)],
                               ),
                             ),
                             child: Center(
@@ -172,7 +182,7 @@ class UserScreen extends StatelessWidget {
                             gradient: LinearGradient(
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
-                              colors: [Color(0xFF58126b), Color(0xFFF6B2E1)],
+                              colors: [Color(0xFF58126b), Color(0xFFF9C3587)],
                             ),
                           ),
                           child: Center(
@@ -210,7 +220,7 @@ class UserScreen extends StatelessWidget {
                             gradient: LinearGradient(
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
-                              colors: [Color(0xFF58126b), Color(0xFFF6B2E1)],
+                              colors: [Color(0xFF58126b), Color(0xFFF9C3587)],
                             ),
                           ),
                           child: Center(
