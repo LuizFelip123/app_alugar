@@ -1,6 +1,7 @@
 import 'package:app_alugar/models/house_model.dart';
 import 'package:app_alugar/models/user_model.dart';
 import 'package:app_alugar/screens/titles/house_title.dart';
+import 'package:app_alugar/screens/titles/myhouse_title.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -65,7 +66,7 @@ class _MyHousesScreenState extends State<MyHousesScreen> {
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (context, index) {
-                      return HouseTitle(
+                      return MyHouseTitle(
                           HouseModel.fromSnapshot(snapshot.data!.docs[index]));
                     },
                   )

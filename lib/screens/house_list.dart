@@ -28,6 +28,7 @@ class HouseList extends StatelessWidget {
             itemCount: snapshot.data!.docs.length,
             itemBuilder: (context, index) {
               return HouseTitle(
+                
                   HouseModel.fromSnapshot(snapshot.data!.docs[index]));
             },
           )

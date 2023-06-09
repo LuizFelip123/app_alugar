@@ -1,11 +1,17 @@
 import 'package:app_alugar/models/house_model.dart';
-import 'package:app_alugar/screens/house_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class HouseTitle extends StatelessWidget {
+class MyHouseTitle extends StatefulWidget {
   final HouseModel _houseModel;
-  HouseTitle(this._houseModel,);
+  MyHouseTitle(
+    this._houseModel,
+  );
+  @override
+  State<MyHouseTitle> createState() => _MyHouseTitleState();
+}
+
+class _MyHouseTitleState extends State<MyHouseTitle> {
   @override
   Widget build(BuildContext context) {
     final row = SafeArea(
@@ -22,7 +28,7 @@ class HouseTitle extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(4),
             child: Image.network(
-              _houseModel.imgsLink[0],
+              widget._houseModel.imgsLink[0],
               fit: BoxFit.cover,
               width: 76,
               height: 76,
@@ -42,10 +48,10 @@ class HouseTitle extends StatelessWidget {
                         color: Colors.grey,
                         fontWeight: FontWeight.bold),
                   ),
-                  Text(_houseModel.cidade!),
+                  Text(widget._houseModel.cidade!),
                   const Padding(padding: EdgeInsets.only(top: 6)),
                   Text(
-                    'R\$ ${_houseModel.valor!.toStringAsFixed(2).replaceAll('.', ",")}',
+                    'R\$ ${widget._houseModel.valor!.toStringAsFixed(2).replaceAll('.', ",")}',
                   )
                 ],
               ),
@@ -53,15 +59,24 @@ class HouseTitle extends StatelessWidget {
           ),
           CupertinoButton(
             padding: EdgeInsets.zero,
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => HouseScreen(_houseModel),
-                ),
-              );
-            },
+            color: Colors.red,
+            onPressed: () {},
             child: const Icon(
-              CupertinoIcons.arrow_right_square_fill,
+              CupertinoIcons.delete,
+              size: 35,
+              color: Colors.white,
+            ),
+          ),
+          SizedBox(
+            width: 7 ,
+          ),
+          CupertinoButton(
+            padding: EdgeInsets.zero,
+            color: Colors.blue,
+            onPressed: () {},
+            child: const Icon(
+              color: Colors.white,
+              CupertinoIcons.pencil,
               size: 35,
             ),
           ),
