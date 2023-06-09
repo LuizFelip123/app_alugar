@@ -10,6 +10,7 @@ class UserModel extends Model {
   User? _user;
   Map<String, dynamic> userData = {};
   bool isLoading = false;
+  List<HouseModel> myHouses = [];
   static UserModel of(BuildContext context) =>
       ScopedModel.of<UserModel>(context);
 

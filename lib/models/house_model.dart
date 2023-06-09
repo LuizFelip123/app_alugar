@@ -8,6 +8,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class HouseModel extends Model {
+  String? _cid;
+
   String? _descricao;
   double? _valor;
   String? _cidade;
@@ -18,6 +20,7 @@ class HouseModel extends Model {
   Map<String, dynamic> _houseData = {};
   HouseModel() {}
   HouseModel.fromSnapshot(DocumentSnapshot snapshot) {
+    _cid = snapshot.id;
     _cidade = snapshot['cidade'];
     _descricao = snapshot['descricao'];
     _estado = snapshot['estado'];

@@ -1,6 +1,7 @@
 import 'package:app_alugar/models/user_model.dart';
 import 'package:app_alugar/screens/house_register_screen.dart';
 import 'package:app_alugar/screens/login_screen.dart';
+import 'package:app_alugar/screens/my_houses_screen.dart';
 import 'package:flutter/material.dart';
 
 class UserScreen extends StatefulWidget {
@@ -113,7 +114,13 @@ class _UserScreenState extends State<UserScreen> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => MyHousesScreen(),
+                              ),
+                            );
+                          },
                           child: Container(
                             height: 180,
                             width: 180,
@@ -149,8 +156,9 @@ class _UserScreenState extends State<UserScreen> {
                                   Text(
                                     "Listar Casas",
                                     style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ],
                               ),
