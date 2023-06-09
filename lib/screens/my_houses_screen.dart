@@ -67,7 +67,7 @@ class _MyHousesScreenState extends State<MyHousesScreen> {
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (context, index) {
                       return MyHouseTitle(
-                          HouseModel.fromSnapshot(snapshot.data!.docs[index]));
+                          HouseModel.fromSnapshot(snapshot.data!.docs[index]), _delete);
                     },
                   )
                 ]);
@@ -77,5 +77,11 @@ class _MyHousesScreenState extends State<MyHousesScreen> {
         ],
       ),
     );
+  }
+
+  _delete(_houseModel) {
+    _houseModel.deleteHouse(_houseModel.cid, _houseModel.imgsLink);
+
+    setState(() {});
   }
 }

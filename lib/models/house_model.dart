@@ -30,7 +30,7 @@ class HouseModel extends Model {
     }
   }
   double? get valor => _valor;
-
+  String? get cid => _cid;
   String? get cidade => _cidade;
   String? get estado => _estado;
   List<File> get imgsFile => _imgsFile;
@@ -83,5 +83,14 @@ class HouseModel extends Model {
       });
     }
     return imgUrls;
+  }
+
+  deleteHouse(id, List<String> imgsReferes) async {
+    for (String img in imgsReferes) {
+      Reference imageRef = FirebaseStorage.instance.refFromURL(img);
+      imageRef.delete();
+    }
+    await FirebaseFirestore.instance.collection("houses").doc(id).delete();
+    notifyListeners();
   }
 }
