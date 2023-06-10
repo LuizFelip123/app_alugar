@@ -247,6 +247,9 @@ class _HouseRegisterScreenState extends State<HouseRegisterScreen> {
                       "cidade": selectedCidade,
                       "user_id": UserModel.of(context).uid()
                     });
+                    if (_images != null) {
+                      _images!.clear();
+                    }
                     Navigator.of(context).pop();
                   },
                   child: Text(

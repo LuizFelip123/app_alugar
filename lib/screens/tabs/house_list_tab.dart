@@ -19,8 +19,8 @@ class HouseListTab extends StatelessWidget {
             label: "Buscar"
           ),
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.shopping_cart),
-            label: "Cadastrar"
+            icon: Icon(CupertinoIcons.bookmark_fill),
+            label: "Salvos"
           ),
         ],
       ),

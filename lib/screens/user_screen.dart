@@ -1,4 +1,5 @@
 import 'package:app_alugar/models/user_model.dart';
+import 'package:app_alugar/screens/house_interested_screen.dart';
 import 'package:app_alugar/screens/house_register_screen.dart';
 import 'package:app_alugar/screens/login_screen.dart';
 import 'package:app_alugar/screens/my_houses_screen.dart';
@@ -115,7 +116,7 @@ class _UserScreenState extends State<UserScreen> {
                           ),
                         ),
                         SizedBox(
-                          width: 25,
+                          width: 7,
                         ),
                         GestureDetector(
                           onTap: () {
@@ -180,46 +181,51 @@ class _UserScreenState extends State<UserScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
-                          height: 180,
-                          width: 180,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 5,
-                                offset: Offset(0, 3), // deslocamento da sombra
-                              ),
-                            ],
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [Color(0xFF58126b), Color(0xFFF9C3587)],
-                            ),
-                          ),
-                          child: Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.house,
-                                  color: Colors.white,
-                                  size: 25,
-                                ),
-                                Text(
-                                  "users interessados",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => HouseInterestedScreen(),));
+                          },
+                          child: Container(
+                            height: 180,
+                            width: 180,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: Offset(0, 3), // deslocamento da sombra
                                 ),
                               ],
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [Color(0xFF58126b), Color(0xFFF9C3587)],
+                              ),
+                            ),
+                            child: Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.house,
+                                    color: Colors.white,
+                                    size: 25,
+                                  ),
+                                  Text(
+                                    "users interessados",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
                         SizedBox(
-                          width: 10,
+                          width: 7 ,
                         ),
                         Container(
                           height: 180,

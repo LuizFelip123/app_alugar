@@ -83,7 +83,6 @@ class _HouseScreenState extends State<HouseScreen> {
                             ),
                           )
                               .then((_) {
-                            // Após retornar da tela de login, chama o setState para reconstruir a tela
                             setState(() {});
                           });
                           ;
@@ -98,7 +97,9 @@ class _HouseScreenState extends State<HouseScreen> {
                         ),
                       )
                     : ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          
+                        },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.black),
                         child: Text(
