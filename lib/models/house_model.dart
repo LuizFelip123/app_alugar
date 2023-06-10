@@ -72,15 +72,17 @@ class HouseModel extends Model {
       Reference reference =
           FirebaseStorage.instance.ref().child(DateTime.now().toString());
       UploadTask uploadTask = reference.putFile(img);
-      await uploadTask.whenComplete(() async {
-        try {
-          final imgUrl = await reference.getDownloadURL();
-          print(imgUrl);
-          imgUrls.add(imgUrl);
-        } catch (onError) {
-          print("Error : $onError");
-        }
-      });
+      // Aguarda o upload ser concluído
+      await uploadTask.whenComplete(() {});
+
+      // Obtém a URL de download
+      try {
+        final imgUrl = await reference.getDownloadURL();
+        print(imgUrl);
+        imgUrls.add(imgUrl);
+      } catch (onError) {
+        print("Error : $onError");
+      }
     }
     return imgUrls;
   }

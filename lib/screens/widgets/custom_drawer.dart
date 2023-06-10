@@ -66,8 +66,6 @@ class CustomDrawer extends StatelessWidget {
                                           MaterialPageRoute(
                                               builder: (context) =>
                                                   LoginScreen()));
-                                    } else {
-                                      model.signOut();
                                     }
                                   },
                                   child: Text(
@@ -112,11 +110,16 @@ class CustomDrawer extends StatelessWidget {
                     page: 1,
                   ),
                   model.isLoggedIn()
-                      ? DrawerTile(
-                          icon: Icons.output,
-                          text: "Sair",
-                          pageController: pageController,
-                          page: 2,
+                      ? GestureDetector(
+                          onTap: () {
+                            model.signOut();
+                          },
+                          child: DrawerTile(
+                            icon: Icons.output,
+                            text: "Sair",
+                            pageController: pageController,
+                            page: 0,
+                          ),
                         )
                       : Container(),
                 ],

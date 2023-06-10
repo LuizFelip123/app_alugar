@@ -180,7 +180,7 @@ class _HouseRegisterScreenState extends State<HouseRegisterScreen> {
                                 onPressed: () async {
                                   _images =
                                       await ImagePicker.platform.pickMultiImage(
-                                    imageQuality: 3,
+                                    imageQuality: 90,
                                   );
                                 },
                                 icon: Icon(Icons.photo_camera)),

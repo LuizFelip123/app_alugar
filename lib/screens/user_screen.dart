@@ -65,7 +65,8 @@ class _UserScreenState extends State<UserScreen> {
                     padding:
                         const EdgeInsets.only(top: 20, left: 20, right: 20),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         GestureDetector(
                           onTap: () {
@@ -113,6 +114,9 @@ class _UserScreenState extends State<UserScreen> {
                             ),
                           ),
                         ),
+                        SizedBox(
+                          width: 25,
+                        ),
                         GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(
@@ -143,6 +147,7 @@ class _UserScreenState extends State<UserScreen> {
                             ),
                             child: Center(
                               child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Icon(
@@ -172,7 +177,8 @@ class _UserScreenState extends State<UserScreen> {
                     padding:
                         const EdgeInsets.only(top: 20, left: 20, right: 20),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
                           height: 180,
@@ -211,6 +217,9 @@ class _UserScreenState extends State<UserScreen> {
                               ],
                             ),
                           ),
+                        ),
+                        SizedBox(
+                          width: 10,
                         ),
                         Container(
                           height: 180,
