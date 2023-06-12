@@ -16,7 +16,7 @@ class _HouseInterestedScreenState extends State<HouseInterestedScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Usuários Interessados"),
+        title: const Text("Usuários Interessados"),
       ),
       body: Column(
         children: [

@@ -18,6 +18,7 @@ class HouseModel extends Model {
   List<File> _imgsFile = [];
   List<String> _imgsLink = [];
   Map<String, dynamic> _houseData = {};
+  List<dynamic> _interested = [];
   HouseModel() {}
   HouseModel.fromSnapshot(DocumentSnapshot snapshot) {
     _cid = snapshot.id;
@@ -25,6 +26,7 @@ class HouseModel extends Model {
     _descricao = snapshot['descricao'];
     _estado = snapshot['estado'];
     _valor = double.parse(snapshot['valor']);
+    _interested = snapshot["interested"];
     for (String imgs in snapshot["imagens"]) {
       _imgsLink.add(imgs);
     }
@@ -36,6 +38,7 @@ class HouseModel extends Model {
   List<File> get imgsFile => _imgsFile;
   Map<String, dynamic> get houseData => _houseData;
   List<String> get imgsLink => _imgsLink;
+  List<dynamic> get interested => _interested;
   static HouseModel of(BuildContext context) =>
       ScopedModel.of<HouseModel>(context);
 
@@ -72,13 +75,13 @@ class HouseModel extends Model {
       Reference reference =
           FirebaseStorage.instance.ref().child(DateTime.now().toString());
       UploadTask uploadTask = reference.putFile(img);
-      
+
       await uploadTask.whenComplete(() {});
 
       try {
         final imgUrl = await reference.getDownloadURL();
         print(imgUrl);
-        imgUrls.add(imgUrl);  
+        imgUrls.add(imgUrl);
       } catch (onError) {
         print("Error : $onError");
       }
@@ -94,7 +97,24 @@ class HouseModel extends Model {
     await FirebaseFirestore.instance.collection("houses").doc(id).delete();
     notifyListeners();
   }
-  interestedHouse(){
-    
+
+  interestedHouse() {}
+  addInterested(idUser) async {
+    DocumentSnapshot docHouse =
+        await FirebaseFirestore.instance.collection("houses").doc(cid).get();
+    final data = docHouse.data() as Map<String, dynamic>;
+    List interested = data["interested"];
+    interested.add(idUser);
+    try {
+      await FirebaseFirestore.instance
+          .collection("houses")
+          .doc(cid)
+          .update({"interested": interested});
+      notifyListeners();
+      return true;
+    } catch (e) {
+      print("Erro: $e");
+      return false;
+    }
   }
 }

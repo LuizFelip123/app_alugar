@@ -245,6 +245,7 @@ class _HouseRegisterScreenState extends State<HouseRegisterScreen> {
                       "imagens": imagesFormat,
                       "estado": selectedEstado,
                       "cidade": selectedCidade,
+                      'interested':[],
                       "user_id": UserModel.of(context).uid()
                     });
                     if (_images != null) {

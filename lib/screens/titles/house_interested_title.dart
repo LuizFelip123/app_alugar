@@ -50,7 +50,7 @@ class HouseInterestedTitle extends StatelessWidget {
             ),
           ),
           Text(
-            "5",
+            _houseModel.interested.length.toString() ,
             style: TextStyle(
               color: Colors.black,
               fontSize: 20,

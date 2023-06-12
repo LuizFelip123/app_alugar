@@ -55,7 +55,8 @@ class _SignupScreenState extends State<SignupScreen> {
                           Map<String, dynamic> userData = {
                             "name": _nameController.text,
                             "email": _emailController.text,
-                            "hide": hire
+                            "hide": hire,
+                            "interested":[]
                           };
                           model.signup(
                               userData: userData,
