@@ -8,12 +8,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 class UserModel extends Model {
   FirebaseAuth _auth = FirebaseAuth.instance;
   User? _user;
+  String? _name;
   Map<String, dynamic> userData = {};
   bool isLoading = false;
   List<HouseModel> myHouses = [];
   static UserModel of(BuildContext context) =>
       ScopedModel.of<UserModel>(context);
-
+  UserModel.fromDocumentSnapshot(DocumentSnapshot documentSnapshot) {
+    _name = documentSnapshot["name"];
+  }
+  UserModel();
+  String? get name => _name;
   void signup(
       {required Map<String, dynamic> userData,
       required String pass,
@@ -78,10 +83,11 @@ class UserModel extends Model {
     _user = null;
     notifyListeners();
   }
-  String uid(){
+
+  String uid() {
     return _user!.uid;
   }
-  
+
   Future _saveUserData(Map<String, dynamic> userData) async {
     this.userData = userData;
     await FirebaseFirestore.instance

@@ -1,3 +1,4 @@
+import 'package:app_alugar/screens/interested_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -50,12 +51,12 @@ class HouseInterestedTitle extends StatelessWidget {
             ),
           ),
           Text(
-            _houseModel.interested.length.toString() ,
+            _houseModel.interested.length.toString(),
             style: TextStyle(
               color: Colors.black,
               fontSize: 20,
               fontWeight: FontWeight.bold,
-             ),
+            ),
           ),
           SizedBox(
             width: 9,
@@ -63,7 +64,11 @@ class HouseInterestedTitle extends StatelessWidget {
           CupertinoButton(
             padding: EdgeInsets.zero,
             color: Colors.black,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => InterestedScreen(_houseModel),
+              ));
+            },
             child: const Icon(
               color: Colors.white,
               CupertinoIcons.person_3,
@@ -76,7 +81,7 @@ class HouseInterestedTitle extends StatelessWidget {
 
     return Column(
       children: <Widget>[
-        row,
+        row, 
         Padding(
           padding: const EdgeInsets.only(
             left: 100,

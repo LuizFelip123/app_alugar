@@ -110,17 +110,12 @@ class CustomDrawer extends StatelessWidget {
                     page: 1,
                   ),
                   model.isLoggedIn()
-                      ? GestureDetector(
-                          onTap: () {
-                            model.signOut();
-                          },
-                          child: DrawerTile(
-                            icon: Icons.output,
-                            text: "Sair",
-                            pageController: pageController,
-                            page: 0,
-                          ),
-                        )
+                      ? DrawerTile(
+                        icon: Icons.output,
+                        text: "Sair",
+                        pageController: pageController,
+                        page: null,
+                      )
                       : Container(),
                 ],
               );

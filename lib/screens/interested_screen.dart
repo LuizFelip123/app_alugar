@@ -1,35 +1,30 @@
 import 'package:app_alugar/models/house_model.dart';
 import 'package:app_alugar/models/user_model.dart';
-import 'package:app_alugar/screens/titles/house_interested_title.dart';
+import 'package:app_alugar/screens/titles/interested_title.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class HouseInterestedScreen extends StatefulWidget {
-  const HouseInterestedScreen({super.key});
+class InterestedScreen extends StatelessWidget {
+  final HouseModel _houseModel;
+  InterestedScreen(this._houseModel);
 
-  @override
-  State<HouseInterestedScreen> createState() => _HouseInterestedScreenState();
-}
-
-class _HouseInterestedScreenState extends State<HouseInterestedScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Usuários Interessados",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
+          "Interessados",
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
+        centerTitle: true,
       ),
       body: Column(
         children: [
           Expanded(
-            child: FutureBuilder<QuerySnapshot>(
+            child: FutureBuilder<DocumentSnapshot>(
               future: FirebaseFirestore.instance
                   .collection("houses")
-                  .where('user_id', isEqualTo: UserModel.of(context).uid())
+                  .doc(_houseModel.cid)
                   .get(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting ||
@@ -47,24 +42,33 @@ class _HouseInterestedScreenState extends State<HouseInterestedScreen> {
                     ),
                   );
                 }
-                if (snapshot.data!.docs.isEmpty) {
-                  return Center(
-                    child: Text(
-                      "Não tem dados cadastrados!",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  );
-                }
+                final List<dynamic> listInterested =
+                    snapshot.data!["interested"];
                 return ListView(children: [
                   Padding(padding: EdgeInsets.only(top: 20)),
                   ListView.builder(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
-                    itemCount: snapshot.data!.docs.length,
+                    itemCount: listInterested.length,
                     itemBuilder: (context, index) {
-                      return HouseInterestedTitle(
-                        HouseModel.fromSnapshot(snapshot.data!.docs[index]),
+                      return FutureBuilder<DocumentSnapshot>(
+                        future: FirebaseFirestore.instance
+                            .collection("users")
+                            .doc(listInterested[index])
+                            .get(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                                  ConnectionState.waiting ||
+                              snapshot.connectionState ==
+                                  ConnectionState.none) {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+
+                          return InterestedTitle(
+                              UserModel.fromDocumentSnapshot(snapshot.data!));
+                        },
                       );
                     },
                   )

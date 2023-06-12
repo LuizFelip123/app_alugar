@@ -104,7 +104,11 @@ class HouseModel extends Model {
         await FirebaseFirestore.instance.collection("houses").doc(cid).get();
     final data = docHouse.data() as Map<String, dynamic>;
     List interested = data["interested"];
-    interested.add(idUser);
+    if (!interested.contains(idUser)) {
+      interested.add(idUser);
+    } else {
+      return false;
+    }
     try {
       await FirebaseFirestore.instance
           .collection("houses")

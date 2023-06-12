@@ -1,3 +1,4 @@
+import 'package:app_alugar/models/user_model.dart';
 import 'package:flutter/material.dart';
 
 class DrawerTile extends StatelessWidget {
@@ -19,6 +20,8 @@ class DrawerTile extends StatelessWidget {
         if(page != null){
             Navigator.of(context).pop();
           pageController.jumpToPage(page!);
+        }else{
+          UserModel.of(context).signOut();
         }
         },
         child: Container(

@@ -97,6 +97,7 @@ class _HouseScreenState extends State<HouseScreen> {
                         ),
                       )
                     : ElevatedButton(
+                       
                         onPressed: () async {
                           final update = await widget._houseModel
                               .addInterested(UserModel.of(context).uid());
@@ -111,7 +112,7 @@ class _HouseScreenState extends State<HouseScreen> {
                             ));
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text("Falha ao demostrarinteresse na casa!",
+                              content: Text("Falha ao demostrar interesse na casa!",
                                   style: TextStyle(color: Colors.white)),
                               duration: Duration(
                                 seconds: 2,
