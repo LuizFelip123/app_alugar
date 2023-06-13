@@ -1,6 +1,7 @@
 import 'package:app_alugar/models/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class InterestedTitle extends StatelessWidget {
   final UserModel _userModel;
@@ -51,7 +52,23 @@ class InterestedTitle extends StatelessWidget {
           CupertinoButton(
             padding: EdgeInsets.zero,
             color: Colors.black,
-            onPressed: () {},
+            onPressed: () async {
+              String? encodeQueryParameters(Map<String, String> params) {
+                return params.entries
+                    .map((MapEntry<String, String> e) =>
+                        '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+                    .join('&');
+              }
+
+              final Uri emailLaunchUri  = Uri(
+                scheme: 'mailto',
+                path:_userModel.email,
+                query: encodeQueryParameters(<String, String>{
+                  'Subject': 'Casa para Alugar',
+                }),
+              );
+               launchUrl(emailLaunchUri);
+            },
             child: const Icon(
               color: Colors.white,
               CupertinoIcons.bubble_middle_bottom_fill,

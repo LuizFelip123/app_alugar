@@ -9,6 +9,7 @@ class UserModel extends Model {
   FirebaseAuth _auth = FirebaseAuth.instance;
   User? _user;
   String? _name;
+  String? _email;
   Map<String, dynamic> userData = {};
   bool isLoading = false;
   List<HouseModel> myHouses = [];
@@ -16,9 +17,11 @@ class UserModel extends Model {
       ScopedModel.of<UserModel>(context);
   UserModel.fromDocumentSnapshot(DocumentSnapshot documentSnapshot) {
     _name = documentSnapshot["name"];
+    _email = documentSnapshot["email"];
   }
   UserModel();
   String? get name => _name;
+  String? get email => _email;
   void signup(
       {required Map<String, dynamic> userData,
       required String pass,

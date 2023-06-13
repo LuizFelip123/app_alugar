@@ -62,7 +62,7 @@ class InterestedScreen extends StatelessWidget {
                               snapshot.connectionState ==
                                   ConnectionState.none) {
                             return Center(
-                              child: CircularProgressIndicator(),
+                              child: Container(),
                             );
                           }
 
