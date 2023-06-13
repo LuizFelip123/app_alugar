@@ -251,7 +251,7 @@ class _UserScreenState extends State<UserScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Icon(
-                                  Icons.list,
+                                  Icons.person_pin_rounded ,
                                   color: Colors.white,
                                   size: 25,
                                 ),
@@ -259,7 +259,7 @@ class _UserScreenState extends State<UserScreen> {
                                   padding: EdgeInsets.only(right: 5),
                                 ),
                                 Text(
-                                  "Listar Casas",
+                                  "Minhas Informações",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold),

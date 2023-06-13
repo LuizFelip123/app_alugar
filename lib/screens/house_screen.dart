@@ -103,7 +103,7 @@ class _HouseScreenState extends State<HouseScreen> {
                               .addInterested(UserModel.of(context).uid());
                           if (update) {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text("Demostração de Interesse realiado!",
+                              content: Text("Demostração de Interesse realizado!",
                                   style: TextStyle(color: Colors.white)),
                               duration: Duration(
                                 seconds: 2,

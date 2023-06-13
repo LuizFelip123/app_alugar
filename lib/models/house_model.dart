@@ -31,6 +31,17 @@ class HouseModel extends Model {
       _imgsLink.add(imgs);
     }
   }
+  HouseModel.fromMap(Map<String, dynamic> map) {
+    _cid = map["id"];
+    _cidade = map['cidade'];
+    _descricao = map['descricao'];
+    _estado = map['estado'];
+    _valor = double.parse(map['valor']);
+    _interested = map["interested"];
+    for (String imgs in map["imagens"]) {
+      _imgsLink.add(imgs);
+    }
+  }
   double? get valor => _valor;
   String? get cid => _cid;
   String? get cidade => _cidade;

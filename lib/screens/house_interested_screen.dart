@@ -29,7 +29,7 @@ class _HouseInterestedScreenState extends State<HouseInterestedScreen> {
             child: FutureBuilder<QuerySnapshot>(
               future: FirebaseFirestore.instance
                   .collection("houses")
-                  .where('user_id', isEqualTo: UserModel.of(context).uid())
+                  .where('user_id', isEqualTo: UserModel.of(context).uid(),)
                   .get(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting ||
