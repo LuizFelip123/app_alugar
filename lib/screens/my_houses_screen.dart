@@ -29,7 +29,7 @@ class _MyHousesScreenState extends State<MyHousesScreen> {
       body: Column(
         children: [
           Expanded(
-            child: FutureBuilder<QuerySnapshot>(
+            child:  FutureBuilder<QuerySnapshot>(
               future: FirebaseFirestore.instance
                   .collection("houses")
                   .where('user_id', isEqualTo: UserModel.of(context).uid())
@@ -41,7 +41,7 @@ class _MyHousesScreenState extends State<MyHousesScreen> {
                     child: CircularProgressIndicator(),
                   );
                 }
-                if (snapshot.hasError) {
+                if (!snapshot.hasError) {
                   return Center(
                     child: Text(
                       "Erro ao carregar os dados!",

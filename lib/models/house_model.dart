@@ -109,7 +109,11 @@ class HouseModel extends Model {
     notifyListeners();
   }
 
-  interestedHouse() {}
+  static Future<HouseModel> findById(String id) async {
+    final doc = await FirebaseFirestore.instance.collection("houses").doc(id).get();
+    return HouseModel.fromSnapshot(doc);
+  }
+
   addInterested(idUser) async {
     DocumentSnapshot docHouse =
         await FirebaseFirestore.instance.collection("houses").doc(cid).get();

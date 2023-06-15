@@ -16,27 +16,32 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Stack(
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: Image.asset(
-              'assets/login/login-fundo.jpg',
-              fit: BoxFit.cover,
-            ),
+      appBar: AppBar(
+        title: Text(
+          "Tela de Login",
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 27,
           ),
+        ),
+        centerTitle: true,
+      ),
+      body: ListView(
+        children: [
           ScopedModelDescendant<UserModel>(builder: (context, child, model) {
             if (model.isLoading)
-              return Center(
-                child: CircularProgressIndicator(),
+              return Padding(
+                padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height/3),
+                child: Center(
+                  
+                  child: CircularProgressIndicator(),
+                ),
               );
             return Padding(
               padding:
-                  EdgeInsets.only(top: MediaQuery.of(context).size.height / 5),
+                  EdgeInsets.only(top: MediaQuery.of(context).size.height / 11),
               child: Container(
-                height: MediaQuery.of(context).size.height,
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -45,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Icon(
                         Icons.person,
                         size: 100,
-                        color: Colors.deepPurple,
+                        color: Colors.black,
                       ),
                       _form(),
                       Padding(
@@ -61,7 +66,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Text(
                             "Login",
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 16),
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16),
                           ),
                           style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
@@ -75,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Divider(
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                       ),
                       SizedBox(
@@ -90,9 +97,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           "Cadastrar-se",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                          ),
+                              color: Colors.black,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],
@@ -137,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void _onSuccess() {
     Navigator.of(context).pop();
   }
-
+ 
   void _onFail() {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text("Falha ao Entrar!", style: TextStyle(color: Colors.white)),

@@ -1,3 +1,4 @@
+import 'package:app_alugar/screens/house_favorite_list.dart';
 import 'package:app_alugar/screens/house_list.dart';
 import 'package:app_alugar/screens/house_list_share_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,8 +24,11 @@ class HouseListTab extends StatelessWidget {
       tabBuilder: (context, index) {
         if (index == 0) {
           return HouseList();
+        } else if (index == 1) {
+          return HouseListShareScreen();
+        } else {
+          return HouseFavoriteList();
         }
-        return HouseListShareScreen();
       },
     );
   }

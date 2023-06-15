@@ -19,17 +19,15 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Stack(
+      appBar: AppBar(
+        title: Text(
+          "Cadastrar",
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 27,),
+        ),
+        centerTitle: true,
+      ),
+      body: ListView(
         children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: Image.asset(
-              'assets/login/signup-fundo.jpg',
-              fit: BoxFit.cover,
-            ),
-          ),
           ScopedModelDescendant<UserModel>(builder: (context, child, model) {
             if (model.isLoading)
               return Center(
@@ -37,9 +35,9 @@ class _SignupScreenState extends State<SignupScreen> {
               );
 
             return Center(
-              child: ListView(
-                padding: EdgeInsets.only(top: 100),
+              child: Column(
                 children: [
+                  Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/13)),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -47,7 +45,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       Icon(
                         Icons.person,
                         size: 100,
-                        color: Colors.deepPurple,
+                        color: Colors.black,
                       ),
                       _form(),
                       ElevatedButton(
@@ -56,7 +54,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             "name": _nameController.text,
                             "email": _emailController.text,
                             "hide": hire,
-                            "interested":[]
+                            "interested": []
                           };
                           model.signup(
                               userData: userData,
@@ -93,19 +91,19 @@ class _SignupScreenState extends State<SignupScreen> {
         children: [
           TextFormField(
             controller: _nameController,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.black),
             decoration: InputDecoration(
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
                     width: 2,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
                 label: Text(
                   "Nome",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                 ),
-                focusColor: Colors.white),
+                focusColor: Colors.black),
           ),
           TextFormField(
             validator: (text) {
@@ -113,38 +111,38 @@ class _SignupScreenState extends State<SignupScreen> {
             },
             controller: _emailController,
             keyboardType: TextInputType.emailAddress,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.black),
             decoration: InputDecoration(
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
                     width: 2,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
                 label: Text(
                   "Email",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                 ),
-                focusColor: Colors.white),
+                focusColor: Colors.black),
           ),
           SizedBox(
             height: 20,
           ),
           TextFormField(
             controller: _passController,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.black),
             obscureText: true,
             decoration: InputDecoration(
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
                     width: 2,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
                 label: Text(
                   "Senha",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 )),
           ),
@@ -157,13 +155,13 @@ class _SignupScreenState extends State<SignupScreen> {
                 child: Text(
                   "Você Está Buscando Casa?",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
               ),
               Checkbox(
-                  checkColor: Colors.white,
-                  side: BorderSide(width: 3, color: Colors.white),
+                  checkColor: Colors.black,
+                  side: BorderSide(width: 3, color: Colors.black),
                   value: hire,
                   onChanged: (value) {
                     if (value != null) {
@@ -182,7 +180,6 @@ class _SignupScreenState extends State<SignupScreen> {
   void _onSuccess() {
     Navigator.of(context).pop();
     Navigator.of(context).pop();
- 
   }
 
   void _onFail() {

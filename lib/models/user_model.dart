@@ -1,4 +1,5 @@
 import 'package:app_alugar/models/house_model.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class UserModel extends Model {
   String? _email;
   Map<String, dynamic> userData = {};
   bool isLoading = false;
-  List<HouseModel> myHouses = [];
+  List<HouseModel> favorites = [];
   static UserModel of(BuildContext context) =>
       ScopedModel.of<UserModel>(context);
   UserModel.fromDocumentSnapshot(DocumentSnapshot documentSnapshot) {
@@ -83,6 +84,7 @@ class UserModel extends Model {
   void signOut() async {
     await _auth.signOut();
     userData = {};
+    favorites = [];
     _user = null;
     notifyListeners();
   }
@@ -113,8 +115,31 @@ class UserModel extends Model {
         userData["name"] = docUser["name"];
         userData["hide"] = docUser["hide"];
         userData["email"] = docUser["email"];
+        for (var element in docUser['favorite']) {
+          await HouseModel.findById(element ).then((value) {
+            favorites.add(value);
+          });
+        }
       }
     }
     notifyListeners();
+  }
+
+  Future<bool> addFavorite(String $id) async {
+    final doc =
+        await FirebaseFirestore.instance.collection("users").doc(uid()).get();
+    List lista = doc["favorite"];
+    if (!lista.contains($id)) {
+      lista.add($id);
+      await FirebaseFirestore.instance.collection("users").doc(uid()).update(
+        {"favorite": lista},
+      );
+      await HouseModel.findById($id).then((value) {
+        favorites.add(value);
+      });
+      notifyListeners();
+      return true;
+    }
+    return false;
   }
 }

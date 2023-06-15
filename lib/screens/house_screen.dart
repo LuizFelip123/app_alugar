@@ -97,13 +97,13 @@ class _HouseScreenState extends State<HouseScreen> {
                         ),
                       )
                     : ElevatedButton(
-                       
                         onPressed: () async {
                           final update = await widget._houseModel
                               .addInterested(UserModel.of(context).uid());
                           if (update) {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text("Demostração de Interesse realizado!",
+                              content: Text(
+                                  "Demostração de Interesse realizado!",
                                   style: TextStyle(color: Colors.white)),
                               duration: Duration(
                                 seconds: 2,
@@ -112,7 +112,8 @@ class _HouseScreenState extends State<HouseScreen> {
                             ));
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text("Falha ao demostrar interesse na casa!",
+                              content: Text(
+                                  "Falha ao demostrar interesse na casa!",
                                   style: TextStyle(color: Colors.white)),
                               duration: Duration(
                                 seconds: 2,
@@ -132,9 +133,21 @@ class _HouseScreenState extends State<HouseScreen> {
                       ),
               ],
             ),
-          )
+          ),
         ],
       ),
+      floatingActionButton: UserModel.of(context).isLoggedIn()
+          ? FloatingActionButton(
+              onPressed: () {
+                UserModel.of(context).addFavorite(widget._houseModel.cid!);
+              },
+              backgroundColor: Colors.black,
+              child: Icon(
+                Icons.save,
+                color: Colors.white,
+              ),
+            )
+          : null,
     );
   }
 }
