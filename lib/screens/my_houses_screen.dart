@@ -41,7 +41,7 @@ class _MyHousesScreenState extends State<MyHousesScreen> {
                     child: CircularProgressIndicator(),
                   );
                 }
-                if (!snapshot.hasError) {
+                if (snapshot.hasError) {
                   return Center(
                     child: Text(
                       "Erro ao carregar os dados!",
