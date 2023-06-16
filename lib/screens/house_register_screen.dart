@@ -237,7 +237,7 @@ class _HouseRegisterScreenState extends State<HouseRegisterScreen> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 15),
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: ()  {
                     final imagesFormat = model.formatImagens(_images);
                     model.saveHouse({
                       "descricao": _descricaoController.text,

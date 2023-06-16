@@ -13,6 +13,7 @@ class MyHousesScreen extends StatefulWidget {
 }
 
 class _MyHousesScreenState extends State<MyHousesScreen> {
+  List<HouseModel> _myHousModels = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +30,7 @@ class _MyHousesScreenState extends State<MyHousesScreen> {
       body: Column(
         children: [
           Expanded(
-            child:  FutureBuilder<QuerySnapshot>(
+            child: FutureBuilder<QuerySnapshot>(
               future: FirebaseFirestore.instance
                   .collection("houses")
                   .where('user_id', isEqualTo: UserModel.of(context).uid())
@@ -66,8 +67,10 @@ class _MyHousesScreenState extends State<MyHousesScreen> {
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (context, index) {
-                      return MyHouseTitle(
-                          HouseModel.fromSnapshot(snapshot.data!.docs[index]), _delete);
+                      _myHousModels.add(
+                          HouseModel.fromSnapshot(snapshot.data!.docs[index]));
+
+                      return MyHouseTitle(_myHousModels[index], _delete);
                     },
                   )
                 ]);
@@ -79,9 +82,12 @@ class _MyHousesScreenState extends State<MyHousesScreen> {
     );
   }
 
-  _delete(_houseModel) {
-    _houseModel.deleteHouse(_houseModel.cid, _houseModel.imgsLink);
+  _delete(_houseModel, context)async {
+    await UserModel.of(context).deleteHouse(_houseModel.cid, _houseModel.imgsLink);
 
-    setState(() {});
+    setState(() {
+      _myHousModels.remove(_houseModel);
+      _myHousModels;
+    });
   }
 }

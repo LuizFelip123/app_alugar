@@ -48,29 +48,35 @@ class _SignupScreenState extends State<SignupScreen> {
                         color: Colors.black,
                       ),
                       _form(),
-                      ElevatedButton(
-                        onPressed: () {
-                          Map<String, dynamic> userData = {
-                            "name": _nameController.text,
-                            "email": _emailController.text,
-                            "hide": hire,
-                            "interested": []
-                          };
-                          model.signup(
-                              userData: userData,
-                              pass: _passController.text,
-                              onSuccess: _onSuccess,
-                              onFail: _onFail);
-                        },
-                        child: Text(
-                          "Cadastrar",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Map<String, dynamic> userData = {
+                              "name": _nameController.text,
+                              "email": _emailController.text,
+                              "hide": hire,
+                              "interested": []
+                            };
+                            model.signup(
+                                userData: userData,
+                                pass: _passController.text,
+                                onSuccess: _onSuccess,
+                                onFail: _onFail);
+                          },
+                          child: Text(
+                      
+                            "Cadastrar",
+                            style: TextStyle(
+                            color: Colors.white,
+                                fontWeight: FontWeight.bold, fontSize: 16),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.black,
+                              shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          )),
                         ),
-                        style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        )),
                       ),
                     ],
                   ),

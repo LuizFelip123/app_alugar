@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class MyHouseTitle extends StatefulWidget {
   final HouseModel _houseModel;
-  final Function(HouseModel houseModel) _delete;
+  final Function(HouseModel houseModel, BuildContext context) _delete;
   MyHouseTitle(this._houseModel, this._delete);
   @override
   State<MyHouseTitle> createState() => _MyHouseTitleState();
@@ -59,8 +59,9 @@ class _MyHouseTitleState extends State<MyHouseTitle> {
           CupertinoButton(
             padding: EdgeInsets.zero,
             color: Colors.red,
-            onPressed: (){
-              widget._delete(widget._houseModel);
+            onPressed: () {
+              widget._delete(widget._houseModel, context);
+              setState(() {});
             },
             child: const Icon(
               CupertinoIcons.delete,

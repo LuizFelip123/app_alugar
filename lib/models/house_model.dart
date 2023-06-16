@@ -20,6 +20,16 @@ class HouseModel extends Model {
   Map<String, dynamic> _houseData = {};
   List<dynamic> _interested = [];
   HouseModel() {}
+  Map<String, dynamic> toMap() {
+    return {
+      "descricao": _descricao,
+      "valor": _valor,
+      "cidade": _cidade,
+      "estado": _estado,
+      "imgs": imgsLink,
+    };
+  }
+
   HouseModel.fromSnapshot(DocumentSnapshot snapshot) {
     _cid = snapshot.id;
     _cidade = snapshot['cidade'];
@@ -53,8 +63,8 @@ class HouseModel extends Model {
   static HouseModel of(BuildContext context) =>
       ScopedModel.of<HouseModel>(context);
 
-  void saveHouse(Map<String, dynamic> houseData) {
-    _saveImgs().then((value) async {
+  void saveHouse(Map<String, dynamic> houseData) async {
+   await _saveImgs().then((value) async {
       final urls = value;
       try {
         houseData['imagens'] = urls;
@@ -100,17 +110,9 @@ class HouseModel extends Model {
     return imgUrls;
   }
 
-  deleteHouse(id, List<String> imgsReferes) async {
-    for (String img in imgsReferes) {
-      Reference imageRef = FirebaseStorage.instance.refFromURL(img);
-      imageRef.delete();
-    }
-    await FirebaseFirestore.instance.collection("houses").doc(id).delete();
-    notifyListeners();
-  }
-
   static Future<HouseModel> findById(String id) async {
-    final doc = await FirebaseFirestore.instance.collection("houses").doc(id).get();
+    final doc =
+        await FirebaseFirestore.instance.collection("houses").doc(id).get();
     return HouseModel.fromSnapshot(doc);
   }
 

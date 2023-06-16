@@ -115,13 +115,38 @@ class UserModel extends Model {
         userData["name"] = docUser["name"];
         userData["hide"] = docUser["hide"];
         userData["email"] = docUser["email"];
+        favorites.clear();
         for (var element in docUser['favorite']) {
-          await HouseModel.findById(element ).then((value) {
+          await HouseModel.findById(element).then((value) {
             favorites.add(value);
           });
         }
       }
     }
+    notifyListeners();
+  }
+
+  deleteHouse(id, List<String> imgsReferes) async {
+    QuerySnapshot usersSnapshot = await FirebaseFirestore.instance
+        .collection("users")
+        .where("favorite", arrayContains: id)
+        .get();
+
+    for (DocumentSnapshot docUser in usersSnapshot.docs) {
+      List idHouses = docUser["favorite"];
+      idHouses.remove(id);
+      await docUser.reference.update({"favorite": idHouses});
+      if (docUser.id == uid()) {
+        favorites.removeWhere((element) => element.cid == id);
+        print(favorites.length);
+      }
+    }
+    for (String img in imgsReferes) {
+      Reference imageRef = FirebaseStorage.instance.refFromURL(img);
+
+      imageRef.delete();
+    }
+    await FirebaseFirestore.instance.collection("houses").doc(id).delete();
     notifyListeners();
   }
 
@@ -134,12 +159,16 @@ class UserModel extends Model {
       await FirebaseFirestore.instance.collection("users").doc(uid()).update(
         {"favorite": lista},
       );
+
       await HouseModel.findById($id).then((value) {
         favorites.add(value);
+        print(favorites.length.toString() + " ${favorites.toString()}");
+        notifyListeners();
+        return true;
       });
-      notifyListeners();
-      return true;
     }
+    notifyListeners();
+
     return false;
   }
 }
