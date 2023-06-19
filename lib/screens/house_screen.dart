@@ -139,7 +139,13 @@ class _HouseScreenState extends State<HouseScreen> {
       floatingActionButton: UserModel.of(context).isLoggedIn()
           ? FloatingActionButton(
               onPressed: () {
-                UserModel.of(context).addFavorite(widget._houseModel.cid!);
+                UserModel.of(context).addFavorite(widget._houseModel.cid!).then((value) {
+                  if(value == true){
+
+                  }else{
+                    
+                  }
+                });
               },
               backgroundColor: Colors.black,
               child: Icon(

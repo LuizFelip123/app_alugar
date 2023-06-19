@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:app_alugar/controllers/localizacao_controller.dart';
 import 'package:app_alugar/models/house_model.dart';
+import 'package:app_alugar/models/house_share_model.dart';
 import 'package:app_alugar/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -24,6 +25,7 @@ class _HouseRegisterScreenState extends State<HouseRegisterScreen> {
   String selectedCidade = "Nenhum";
   final _valorController = TextEditingController();
   final _descricaoController = TextEditingController();
+  final _quantController = TextEditingController();
   List<PickedFile>? _images;
   List<DropdownMenuItem<String>> menuCidade = [
     DropdownMenuItem(child: Text("Nenhum"), value: "Nenhum")
@@ -56,217 +58,234 @@ class _HouseRegisterScreenState extends State<HouseRegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Cadastrar Casa",
-          style: TextStyle(fontFamily: "times", fontWeight: FontWeight.bold),
+        appBar: AppBar(
+          title: Text(
+            "Cadastrar Casa",
+            style: TextStyle(fontFamily: "times", fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
         ),
-        centerTitle: true,
-      ),
-      body: ScopedModelDescendant<HouseModel>(
-        builder: (context, child, model) {
-          return ListView(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Form(
-                      child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        DropdownButtonFormField(
-                          decoration: InputDecoration(labelText: "Estado"),
-                          items: menuEstados,
-                          value: selectedEstado,
-                          onChanged: (value) async {
-                            setState(() {
-                              if (value != null) {
-                                selectedEstado = value;
-                              }
-                            });
-                            if (value != "Nenhum") {
-                              setState(() {
-                                menuCidade.clear();
-                                menuCidade.add(DropdownMenuItem(
-                                    child: Text("Nenhum"), value: "Nenhum"));
-                                selectedCidade = "Nenhum";
-                              });
-                              final cidades = await controller
-                                  .getCitysForStats(selectedEstado);
-                              await _initCidade(cidades);
-                              setState(() {
-                                menuCidade;
-                              });
+        body: ListView(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Form(
+                    child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      DropdownButtonFormField(
+                        decoration: InputDecoration(labelText: "Estado"),
+                        items: menuEstados,
+                        value: selectedEstado,
+                        onChanged: (value) async {
+                          setState(() {
+                            if (value != null) {
+                              selectedEstado = value;
                             }
-                          },
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        DropdownButtonFormField(
-                          decoration: InputDecoration(labelText: "Cidade"),
-                          items: menuCidade,
-                          value: selectedCidade,
-                          onChanged: (value) {
+                          });
+                          if (value != "Nenhum") {
                             setState(() {
-                              if (value != null) {
-                                selectedCidade = value;
-                              }
+                              menuCidade.clear();
+                              menuCidade.add(DropdownMenuItem(
+                                  child: Text("Nenhum"), value: "Nenhum"));
+                              selectedCidade = "Nenhum";
                             });
-                          },
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        TextFormField(
-                          controller: _valorController,
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  width: 2,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              label: Text("Valor do Alguel")),
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        TextFormField(
-                          controller: _descricaoController,
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  width: 2,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              label: Text("Descrição")),
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                "A casa será comparilhada?",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                ),
+                            final cidades = await controller
+                                .getCitysForStats(selectedEstado);
+                            await _initCidade(cidades);
+                            setState(() {
+                              menuCidade;
+                            });
+                          }
+                        },
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      DropdownButtonFormField(
+                        decoration: InputDecoration(labelText: "Cidade"),
+                        items: menuCidade,
+                        value: selectedCidade,
+                        onChanged: (value) {
+                          setState(() {
+                            if (value != null) {
+                              selectedCidade = value;
+                            }
+                          });
+                        },
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      TextFormField(
+                        controller: _valorController,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 2,
+                                color: Colors.black,
                               ),
                             ),
-                            Checkbox(
-                                checkColor: Colors.white,
-                                side: BorderSide(width: 3, color: Colors.black),
-                                value: shareHouse,
-                                onChanged: (value) {
-                                  if (value != null) {
+                            label: Text("Valor do Alguel")),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      TextFormField(
+                        controller: _descricaoController,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 2,
+                                color: Colors.black,
+                              ),
+                            ),
+                            label: Text("Descrição")),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              "A casa será comparilhada?",
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          Checkbox(
+                              checkColor: Colors.white,
+                              side: BorderSide(width: 3, color: Colors.black),
+                              value: shareHouse,
+                              onChanged: (value) {
+                                if (value != null) {
+                                  setState(() {
+                                    shareHouse = value;
+                                  });
+                                }
+                              })
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          IconButton(
+                              onPressed: () async {
+                                _images =
+                                    await ImagePicker.platform.pickMultiImage(
+                                  imageQuality: 90,
+                                );
+                              },
+                              icon: Icon(Icons.photo_camera)),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Selecionar Fotos da Casa",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                      shareHouse != null && shareHouse == true
+                          ? Column(
+                              children: [
+                                DropdownButtonFormField(
+                                  decoration: InputDecoration(
+                                      labelText: "Sexo do convivente"),
+                                  items: menuItems,
+                                  value: selectedValue,
+                                  onChanged: (value) {
                                     setState(() {
-                                      shareHouse = value;
+                                      if (value != null) {
+                                        selectedValue = value;
+                                      }
                                     });
-                                  }
-                                })
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            IconButton(
-                                onPressed: () async {
-                                  _images =
-                                      await ImagePicker.platform.pickMultiImage(
-                                    imageQuality: 90,
-                                  );
-                                },
-                                icon: Icon(Icons.photo_camera)),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              "Selecionar Fotos da Casa",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                        shareHouse != null && shareHouse == true
-                            ? Column(
-                                children: [
-                                  DropdownButtonFormField(
-                                    decoration: InputDecoration(
-                                        labelText: "Sexo do conviventes"),
-                                    items: menuItems,
-                                    value: selectedValue,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        if (value != null) {
-                                          selectedValue = value;
-                                        }
-                                      });
-                                    },
-                                  ),
-                                  SizedBox(
-                                    height: 30,
-                                  ),
-                                  TextFormField(
-                                    keyboardType: TextInputType.number,
-                                    decoration: InputDecoration(
-                                        enabledBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                            width: 2,
-                                            color: Colors.black,
-                                          ),
+                                  },
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                TextFormField(
+                                  keyboardType: TextInputType.number,
+                                  controller: _quantController,
+                                  decoration: InputDecoration(
+                                      enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          width: 2,
+                                          color: Colors.black,
                                         ),
-                                        label: Text("Quantidade Vagas")),
-                                  ),
-                                  SizedBox(
-                                    height: 30,
-                                  ),
-                                ],
-                              )
-                            : Container(),
-                      ],
-                    ),
-                  ))
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 15),
-                child: ElevatedButton(
-                  onPressed: ()  {
+                                      ),
+                                      label: Text("Quantidade Vagas")),
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                              ],
+                            )
+                          : Container(),
+                    ],
+                  ),
+                ))
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 15),
+              child: ElevatedButton(
+                onPressed: () {
+                  if (shareHouse == false) {
+                    final model = HouseModel();
                     final imagesFormat = model.formatImagens(_images);
+
                     model.saveHouse({
                       "descricao": _descricaoController.text,
                       "valor": _valorController.text,
                       "imagens": imagesFormat,
                       "estado": selectedEstado,
                       "cidade": selectedCidade,
-                      'interested':[],
+                      "shareHouse": shareHouse,
+                      'interested': [],
                       "user_id": UserModel.of(context).uid()
                     });
-                    if (_images != null) {
-                      _images!.clear();
-                    }
-                    Navigator.of(context).pop();
-                  },
-                  child: Text(
-                    "Cadastrar",
-                    style: TextStyle(
-                        fontFamily: "times",
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
-                  ),
+                  } else {
+                    final model = HouseShareModel();
+                    final imagesFormat = model.formatImagens(_images);
+
+                    model.saveHouse({
+                      "descricao": _descricaoController.text,
+                      "valor": _valorController.text,
+                      "imagens": imagesFormat,
+                      "estado": selectedEstado,
+                      "cidade": selectedCidade,
+                      "shareHouse": shareHouse,
+                      "genero": selectedValue,
+                      "quant": _quantController.text,
+                      'interested': [],
+                      "user_id": UserModel.of(context).uid()
+                    });
+                  }
+                  if (_images != null) {
+                    _images!.clear();
+                  }
+                  Navigator.of(context).pop();
+                },
+                child: Text(
+                  "Cadastrar",
+                  style: TextStyle(
+                      fontFamily: "times",
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
-            ],
-          );
-        },
-      ),
-    );
+            ),
+          ],
+        ));
   }
 
   _initCidade(value) {

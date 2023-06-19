@@ -162,7 +162,6 @@ class UserModel extends Model {
 
       await HouseModel.findById($id).then((value) {
         favorites.add(value);
-        print(favorites.length.toString() + " ${favorites.toString()}");
         notifyListeners();
         return true;
       });

@@ -18,7 +18,7 @@ class _HouseListState extends State<HouseList> {
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
-          .collection("houses")
+          .collection("houses").where('shareHouse', isEqualTo: false)
           .orderBy("valor", descending: false)
           .snapshots(),
       builder: (context, snapshot) {

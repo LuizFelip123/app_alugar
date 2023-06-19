@@ -19,7 +19,7 @@ class HouseModel extends Model {
   List<String> _imgsLink = [];
   Map<String, dynamic> _houseData = {};
   List<dynamic> _interested = [];
-  HouseModel() {}
+  HouseModel();
   Map<String, dynamic> toMap() {
     return {
       "descricao": _descricao,
@@ -52,6 +52,42 @@ class HouseModel extends Model {
       _imgsLink.add(imgs);
     }
   }
+  set valor(double? valor) {
+    _valor = valor;
+  }
+
+  set cid(String? cid) {
+    _cid = cid;
+  }
+
+  set descricao(String? descricao) {
+    _descricao = descricao;
+  }
+
+  set cidade(String? cidade) {
+    _cidade = cidade;
+  }
+
+  set estado(String? estado) {
+    _estado = estado;
+  }
+
+  set imgsFile(List<File> imgsFile) {
+    _imgsFile = imgsFile;
+  }
+
+  set houseData(Map<String, dynamic> map) {
+    _houseData = map;
+  }
+
+  set imgsLink(List<String> imgsLink) {
+    _imgsLink = imgsLink;
+  }
+
+  set interested(List<dynamic> interested) {
+    _interested = interested;
+  }
+
   double? get valor => _valor;
   String? get cid => _cid;
   String? get cidade => _cidade;
@@ -63,8 +99,8 @@ class HouseModel extends Model {
   static HouseModel of(BuildContext context) =>
       ScopedModel.of<HouseModel>(context);
 
-  void saveHouse(Map<String, dynamic> houseData) async {
-   await _saveImgs().then((value) async {
+   void saveHouse(Map<String, dynamic> houseData) async {
+    await _saveImgs().then((value) async {
       final urls = value;
       try {
         houseData['imagens'] = urls;
