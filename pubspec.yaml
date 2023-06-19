@@ -48,7 +48,7 @@ dependencies:
   carousel_slider: ^4.2.1
   image_picker: ^0.8.7+5
   http: ^0.13.0
-
+  page_transition: ^2.0.9
 dev_dependencies:
   flutter_test:
     sdk: flutter

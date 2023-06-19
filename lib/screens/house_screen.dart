@@ -1,4 +1,5 @@
 import 'package:app_alugar/models/house_model.dart';
+import 'package:app_alugar/models/house_share_model.dart';
 import 'package:app_alugar/models/user_model.dart';
 import 'package:app_alugar/screens/login_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -14,8 +15,12 @@ class HouseScreen extends StatefulWidget {
 }
 
 class _HouseScreenState extends State<HouseScreen> {
+  HouseShareModel? houseShareModel;
   @override
   Widget build(BuildContext context) {
+    if (widget._houseModel.shareHouse == true) {
+      houseShareModel = widget._houseModel as HouseShareModel;
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -73,6 +78,25 @@ class _HouseScreenState extends State<HouseScreen> {
                 SizedBox(
                   height: 18.0,
                 ),
+                widget._houseModel.shareHouse == true
+                    ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Apenas : " + houseShareModel!.genero!,
+                          ),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          Text(
+                            "vagas : " + houseShareModel!.quant.toString(),
+                          ),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                        ],
+                      )
+                    : Container(),
                 !UserModel.of(context).isLoggedIn()
                     ? ElevatedButton(
                         onPressed: () {
@@ -139,12 +163,11 @@ class _HouseScreenState extends State<HouseScreen> {
       floatingActionButton: UserModel.of(context).isLoggedIn()
           ? FloatingActionButton(
               onPressed: () {
-                UserModel.of(context).addFavorite(widget._houseModel.cid!).then((value) {
-                  if(value == true){
-
-                  }else{
-                    
-                  }
+                UserModel.of(context)
+                    .addFavorite(widget._houseModel.cid!)
+                    .then((value) {
+                  if (value == true) {
+                  } else {}
                 });
               },
               backgroundColor: Colors.black,

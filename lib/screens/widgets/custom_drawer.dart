@@ -97,18 +97,7 @@ class CustomDrawer extends StatelessWidget {
                     pageController: pageController,
                     page: 1,
                   ),
-                  DrawerTile(
-                    icon: Icons.person_pin_circle_outlined,
-                    text: "Aluguel Compartilhado",
-                    pageController: pageController,
-                    page: 1,
-                  ),
-                  DrawerTile(
-                    icon: Icons.apartment,
-                    text: "Aluguel",
-                    pageController: pageController,
-                    page: 1,
-                  ),
+            
                   model.isLoggedIn()
                       ? DrawerTile(
                         icon: Icons.output,

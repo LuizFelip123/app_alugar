@@ -16,6 +16,7 @@ class _HouseListState extends State<HouseList> {
   String search = "";
   @override
   Widget build(BuildContext context) {
+  
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection("houses").where('shareHouse', isEqualTo: false)

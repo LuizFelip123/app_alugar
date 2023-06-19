@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScopedModel<UserModel>(
       model: UserModel(),
-      child:  ScopedModel<HouseModel>(
+       child:  ScopedModel<HouseModel>(
         model: HouseModel(),
         child: MaterialApp(
           title: 'Flutter Demo',

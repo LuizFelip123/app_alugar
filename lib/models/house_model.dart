@@ -9,7 +9,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 class HouseModel extends Model {
   String? _cid;
-
+  bool? _shareHouse;
   String? _descricao;
   double? _valor;
   String? _cidade;
@@ -27,6 +27,7 @@ class HouseModel extends Model {
       "cidade": _cidade,
       "estado": _estado,
       "imgs": imgsLink,
+      "shareHouse": _shareHouse
     };
   }
 
@@ -37,12 +38,14 @@ class HouseModel extends Model {
     _estado = snapshot['estado'];
     _valor = double.parse(snapshot['valor']);
     _interested = snapshot["interested"];
+    _shareHouse = snapshot["shareHouse"];
     for (String imgs in snapshot["imagens"]) {
       _imgsLink.add(imgs);
     }
   }
   HouseModel.fromMap(Map<String, dynamic> map) {
     _cid = map["id"];
+    _shareHouse = map["shareHouse"];
     _cidade = map['cidade'];
     _descricao = map['descricao'];
     _estado = map['estado'];
@@ -52,6 +55,10 @@ class HouseModel extends Model {
       _imgsLink.add(imgs);
     }
   }
+  set shareHouse(bool? shareHouse) {
+    _shareHouse = shareHouse;
+  }
+
   set valor(double? valor) {
     _valor = valor;
   }
@@ -88,6 +95,7 @@ class HouseModel extends Model {
     _interested = interested;
   }
 
+  bool? get shareHouse => _shareHouse;
   double? get valor => _valor;
   String? get cid => _cid;
   String? get cidade => _cidade;
@@ -99,7 +107,7 @@ class HouseModel extends Model {
   static HouseModel of(BuildContext context) =>
       ScopedModel.of<HouseModel>(context);
 
-   void saveHouse(Map<String, dynamic> houseData) async {
+  void saveHouse(Map<String, dynamic> houseData) async {
     await _saveImgs().then((value) async {
       final urls = value;
       try {

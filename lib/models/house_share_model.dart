@@ -8,6 +8,8 @@ class HouseShareModel extends HouseModel {
   HouseShareModel();
   HouseShareModel.fromSnapshot(DocumentSnapshot snapshot) {
     cid = snapshot.id;
+    shareHouse = snapshot["shareHouse"];
+
     cidade = snapshot['cidade'];
     descricao = snapshot['descricao'];
     estado = snapshot['estado'];
@@ -19,8 +21,9 @@ class HouseShareModel extends HouseModel {
       imgsLink.add(imgs);
     }
   }
-  HouseShareModel.fromMap(Map<String, dynamic> map){
+  HouseShareModel.fromMap(Map<String, dynamic> map) {
     cid = map['id'];
+    shareHouse = map["shareHouse"];
     cidade = map['cidade'];
     descricao = map['descricao'];
     estado = map['estado'];
@@ -32,4 +35,6 @@ class HouseShareModel extends HouseModel {
       imgsLink.add(imgs);
     }
   }
+  String? get genero => _generoConvivente;
+  int? get quant => _quant;
 }
