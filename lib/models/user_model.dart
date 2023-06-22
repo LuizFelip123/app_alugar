@@ -170,4 +170,31 @@ class UserModel extends Model {
 
     return false;
   }
+
+  updateUser(String email, String name) async {
+    _user!.updateEmail(email);
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(uid())
+        .update({"name": name, "email": email});
+
+    userData["name"] = name;
+    userData["email"] = email;
+    _email = email;
+    _name = name;
+    notifyListeners();
+  }
+
+  removeFavorite(HouseModel houseModel) async {
+    final doc =
+        await FirebaseFirestore.instance.collection("users").doc(uid()).get();
+    List lista = doc["favorite"];
+    lista.remove(houseModel.cid);
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(uid())
+        .update({"favorite": lista});
+    favorites.remove(houseModel);
+    notifyListeners();
+  }
 }

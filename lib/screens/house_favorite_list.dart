@@ -1,6 +1,7 @@
 import 'package:app_alugar/models/house_model.dart';
 import 'package:app_alugar/models/user_model.dart';
 import 'package:app_alugar/screens/login_screen.dart';
+import 'package:app_alugar/screens/titles/favorite_title.dart';
 import 'package:app_alugar/screens/titles/house_title.dart';
 import 'package:app_alugar/screens/titles/myhouse_title.dart';
 import 'package:flutter/cupertino.dart';
@@ -62,7 +63,7 @@ class _HouseFavoriteListState extends State<HouseFavoriteList> {
             return ListView.builder(
               itemCount: model.favorites.length,
               itemBuilder: (context, index) {
-                return HouseTitle(model.favorites[index]);
+                return FavoriteTitle(model.favorites[index]);
               },
             );
           });

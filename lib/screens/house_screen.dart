@@ -80,7 +80,7 @@ class _HouseScreenState extends State<HouseScreen> {
                 ),
                 widget._houseModel.shareHouse == true
                     ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             "Apenas : " + houseShareModel!.genero!,
@@ -167,7 +167,24 @@ class _HouseScreenState extends State<HouseScreen> {
                     .addFavorite(widget._houseModel.cid!)
                     .then((value) {
                   if (value == true) {
-                  } else {}
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("Casa Adicionado nos Favoritos!",
+                          style: TextStyle(color: Colors.white)),
+                      duration: Duration(
+                        seconds: 2,
+                      ),
+                      backgroundColor: Colors.black,
+                    ));
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("Falha ao salvar casa!",
+                          style: TextStyle(color: Colors.white)),
+                      duration: Duration(
+                        seconds: 2,
+                      ),
+                      backgroundColor: Colors.black,
+                    ));
+                  }
                 });
               },
               backgroundColor: Colors.black,

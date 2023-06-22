@@ -1,11 +1,14 @@
 import 'package:app_alugar/models/house_model.dart';
+import 'package:app_alugar/models/user_model.dart';
 import 'package:app_alugar/screens/house_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class HouseTitle extends StatelessWidget {
+class FavoriteTitle extends StatelessWidget {
   final  _houseModel;
-  HouseTitle(this._houseModel,);
+  FavoriteTitle(
+    this._houseModel,
+  );
   @override
   Widget build(BuildContext context) {
     final row = SafeArea(
@@ -50,6 +53,20 @@ class HouseTitle extends StatelessWidget {
                 ],
               ),
             ),
+          ),
+          CupertinoButton(
+            padding: EdgeInsets.zero,
+            onPressed: () {
+              UserModel.of(context).removeFavorite(_houseModel);
+            },
+            child: const Icon(
+              CupertinoIcons.delete,
+              size: 35,
+              color: Colors.red,
+            ),
+          ),
+          SizedBox(
+            width: 7,
           ),
           CupertinoButton(
             padding: EdgeInsets.zero,

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app_alugar/models/house_share_model.dart';
 import 'package:app_alugar/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -157,7 +158,8 @@ class HouseModel extends Model {
   static Future<HouseModel> findById(String id) async {
     final doc =
         await FirebaseFirestore.instance.collection("houses").doc(id).get();
-    return HouseModel.fromSnapshot(doc);
+    if (!doc["shareHouse"]) return HouseModel.fromSnapshot(doc);
+    return HouseShareModel.fromSnapshot(doc);
   }
 
   addInterested(idUser) async {

@@ -3,6 +3,7 @@ import 'package:app_alugar/screens/house_interested_screen.dart';
 import 'package:app_alugar/screens/house_register_screen.dart';
 import 'package:app_alugar/screens/login_screen.dart';
 import 'package:app_alugar/screens/my_houses_screen.dart';
+import 'package:app_alugar/screens/user_edit_screen.dart';
 import 'package:flutter/material.dart';
 
 class UserScreen extends StatefulWidget {
@@ -182,8 +183,10 @@ class _UserScreenState extends State<UserScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         GestureDetector(
-                          onTap: (){
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => HouseInterestedScreen(),));
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => HouseInterestedScreen(),
+                            ));
                           },
                           child: Container(
                             height: 180,
@@ -195,7 +198,8 @@ class _UserScreenState extends State<UserScreen> {
                                   color: Colors.grey.withOpacity(0.5),
                                   spreadRadius: 2,
                                   blurRadius: 5,
-                                  offset: Offset(0, 3), // deslocamento da sombra
+                                  offset:
+                                      Offset(0, 3), // deslocamento da sombra
                                 ),
                               ],
                               gradient: LinearGradient(
@@ -225,46 +229,56 @@ class _UserScreenState extends State<UserScreen> {
                           ),
                         ),
                         SizedBox(
-                          width: 7 ,
+                          width: 7,
                         ),
-                        Container(
-                          height: 180,
-                          width: 180,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 5,
-                                offset: Offset(0, 3), // deslocamento da sombra
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => UserEditScreen(UserModel.of(context)),
                               ),
-                            ],
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [Color(0xFF58126b), Color(0xFFF9C3587)],
-                            ),
-                          ),
-                          child: Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.person_pin_rounded ,
-                                  color: Colors.white,
-                                  size: 25,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(right: 5),
-                                ),
-                                Text(
-                                  "Minhas Informações",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
+                            );
+                          },
+                          child: Container(
+                            height: 180,
+                            width: 180,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset:
+                                      Offset(0, 3), // deslocamento da sombra
                                 ),
                               ],
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [Color(0xFF58126b), Color(0xFFF9C3587)],
+                              ),
+                            ),
+                            child: Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.person_pin_rounded,
+                                    color: Colors.white,
+                                    size: 25,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(right: 5),
+                                  ),
+                                  Text(
+                                    "Minhas Informações",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
