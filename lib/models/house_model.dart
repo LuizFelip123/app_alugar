@@ -113,12 +113,11 @@ class HouseModel extends Model {
       final urls = value;
       try {
         houseData['imagens'] = urls;
-        print("Chegou aqui");
+        
         await FirebaseFirestore.instance
             .collection("houses")
             .doc()
             .set(houseData);
-        print("Chegou aqui");
       } catch (e) {
         print("Erro = $e");
       }

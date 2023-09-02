@@ -12,8 +12,7 @@ class HouseListTab extends StatelessWidget {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.home), label: "Casa"),
+      
           BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.person_3),
               label: "Alguel compartilhado"),
@@ -23,9 +22,8 @@ class HouseListTab extends StatelessWidget {
       ),
       tabBuilder: (context, index) {
         if (index == 0) {
-          return HouseList();
-        } else if (index == 1) {
           return HouseListShareScreen();
+        
         } else {
           return HouseFavoriteList();
         }

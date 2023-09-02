@@ -127,7 +127,7 @@ class _HouseScreenState extends State<HouseScreen> {
                           if (update) {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(
-                                  "Demostração de Interesse realizado!",
+                                  "Demonstração de Interesse realizado!",
                                   style: TextStyle(color: Colors.white)),
                               duration: Duration(
                                 seconds: 2,
@@ -137,7 +137,7 @@ class _HouseScreenState extends State<HouseScreen> {
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(
-                                  "Falha ao demostrar interesse na casa!",
+                                  "Falha ao demonstrar interesse na casa!",
                                   style: TextStyle(color: Colors.white)),
                               duration: Duration(
                                 seconds: 2,
@@ -149,7 +149,7 @@ class _HouseScreenState extends State<HouseScreen> {
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.black),
                         child: Text(
-                          "Demostrar interesse",
+                          "Demonstrar interesse",
                           style: TextStyle(
                             color: Colors.white,
                           ),

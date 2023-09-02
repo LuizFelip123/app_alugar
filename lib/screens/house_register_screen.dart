@@ -129,7 +129,7 @@ class _HouseRegisterScreenState extends State<HouseRegisterScreen> {
                                 color: Colors.black,
                               ),
                             ),
-                            label: Text("Valor do Alguel")),
+                            label: Text("Valor do Aluguel")),
                       ),
                       SizedBox(
                         height: 30,
@@ -149,30 +149,7 @@ class _HouseRegisterScreenState extends State<HouseRegisterScreen> {
                       SizedBox(
                         height: 30,
                       ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              "A casa será comparilhada?",
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                          Checkbox(
-                              checkColor: Colors.white,
-                              side: BorderSide(width: 3, color: Colors.black),
-                              value: shareHouse,
-                              onChanged: (value) {
-                                if (value != null) {
-                                  setState(() {
-                                    shareHouse = value;
-                                  });
-                                }
-                              })
-                        ],
-                      ),
+                    
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -193,8 +170,7 @@ class _HouseRegisterScreenState extends State<HouseRegisterScreen> {
                           ),
                         ],
                       ),
-                      shareHouse != null && shareHouse == true
-                          ? Column(
+                           Column(
                               children: [
                                 DropdownButtonFormField(
                                   decoration: InputDecoration(
@@ -229,7 +205,7 @@ class _HouseRegisterScreenState extends State<HouseRegisterScreen> {
                                 ),
                               ],
                             )
-                          : Container(),
+                   
                     ],
                   ),
                 ))
@@ -239,8 +215,7 @@ class _HouseRegisterScreenState extends State<HouseRegisterScreen> {
               padding: const EdgeInsets.only(bottom: 15),
               child: ElevatedButton(
                 onPressed: () {
-                  if (shareHouse == false) {
-                    final model = HouseModel();
+                  final model = HouseShareModel();
                     final imagesFormat = model.formatImagens(_images);
 
                     model.saveHouse({
@@ -249,27 +224,12 @@ class _HouseRegisterScreenState extends State<HouseRegisterScreen> {
                       "imagens": imagesFormat,
                       "estado": selectedEstado,
                       "cidade": selectedCidade,
-                      "shareHouse": shareHouse,
-                      'interested': [],
-                      "user_id": UserModel.of(context).uid()
-                    });
-                  } else {
-                    final model = HouseShareModel();
-                    final imagesFormat = model.formatImagens(_images);
-
-                    model.saveHouse({
-                      "descricao": _descricaoController.text,
-                      "valor": _valorController.text,
-                      "imagens": imagesFormat,
-                      "estado": selectedEstado,
-                      "cidade": selectedCidade,
-                      "shareHouse": shareHouse,
+                      "shareHouse": true,
                       "genero": selectedValue,
                       "quant": _quantController.text,
                       'interested': [],
                       "user_id": UserModel.of(context).uid()
                     });
-                  }
                   if (_images != null) {
                     _images!.clear();
                   }
