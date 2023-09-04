@@ -1,4 +1,4 @@
-import 'package:app_alugar/models/house_model.dart';
+import 'package:app_alugar/models/house_share_model.dart';
 import 'package:app_alugar/models/user_model.dart';
 import 'package:app_alugar/screens/titles/house_interested_title.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -64,7 +64,7 @@ class _HouseInterestedScreenState extends State<HouseInterestedScreen> {
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (context, index) {
                       return HouseInterestedTitle(
-                        HouseModel.fromSnapshot(snapshot.data!.docs[index]),
+                        HouseShareModel.fromSnapshot(snapshot.data!.docs[index]),
                       );
                     },
                   )

@@ -1,10 +1,10 @@
-import 'package:app_alugar/models/house_model.dart';
+import 'package:app_alugar/models/house_share_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MyHouseTitle extends StatefulWidget {
-  final HouseModel _houseModel;
-  final Function(HouseModel houseModel, BuildContext context) _delete;
+  final HouseShareModel _houseModel;
+  final Function(HouseShareModel houseModel, BuildContext context) _delete;
   MyHouseTitle(this._houseModel, this._delete);
   @override
   State<MyHouseTitle> createState() => _MyHouseTitleState();

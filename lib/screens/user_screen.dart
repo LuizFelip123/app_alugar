@@ -5,6 +5,7 @@ import 'package:app_alugar/screens/login_screen.dart';
 import 'package:app_alugar/screens/my_houses_screen.dart';
 import 'package:app_alugar/screens/user_edit_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 class UserScreen extends StatefulWidget {
   const UserScreen({super.key});
@@ -17,8 +18,10 @@ class _UserScreenState extends State<UserScreen> {
   
   @override
   Widget build(BuildContext context) {
-    return !UserModel.of(context).isLoggedIn()
-        ? Container(
+    return Container(
+      child: ScopedModelDescendant<UserModel>(builder: (context, child, model) {
+         if(!model.isLoggedIn()){
+            return  Container(
             padding: EdgeInsets.all(16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -57,8 +60,9 @@ class _UserScreenState extends State<UserScreen> {
                     ))
               ],
             ),
-          )
-        : SingleChildScrollView(
+          );
+         }  
+         return    SingleChildScrollView(
             child: Container(
               padding: EdgeInsets.only(top: 50),
               child: Column(
@@ -289,6 +293,10 @@ class _UserScreenState extends State<UserScreen> {
                 ],
               ),
             ),
-          );
+          ); 
+       }
+    )
+    );
+       
   }
 }

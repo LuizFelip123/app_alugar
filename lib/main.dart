@@ -1,4 +1,4 @@
-import 'package:app_alugar/models/house_model.dart';
+import 'package:app_alugar/models/house_share_model.dart';
 import 'package:app_alugar/models/user_model.dart';
 import 'package:app_alugar/screens/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScopedModel<UserModel>(
       model: UserModel(),
-       child:  ScopedModel<HouseModel>(
-        model: HouseModel(),
+       child:  ScopedModel<HouseShareModel>(
+        model: HouseShareModel(),
         child: MaterialApp(
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,

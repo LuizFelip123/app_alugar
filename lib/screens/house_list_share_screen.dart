@@ -18,7 +18,7 @@ class _HouseListShareScreenState extends State<HouseListShareScreen> {
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection("houses")
-          .where('shareHouse', isEqualTo: true)
+
           .orderBy("valor", descending: false)
           .snapshots(),
       builder: (context, snapshot) {

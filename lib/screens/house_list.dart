@@ -1,4 +1,4 @@
-import 'package:app_alugar/models/house_model.dart';
+import 'package:app_alugar/models/house_share_model.dart';
 import 'package:app_alugar/screens/home_screen.dart';
 import 'package:app_alugar/screens/widgets/custom_barra.dart';
 import 'package:app_alugar/screens/titles/house_title.dart';
@@ -19,8 +19,8 @@ class _HouseListState extends State<HouseList> {
   
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
-          .collection("houses").where('shareHouse', isEqualTo: true)
-          .orderBy("cidade", descending: true)
+          .collection("houses")
+          .orderBy("cidade")
           .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
@@ -41,13 +41,13 @@ class _HouseListState extends State<HouseList> {
                   snapshot.data!.docs[index].data() as Map<String, dynamic>;
               if (search.isEmpty) {
                 return HouseTitle(
-                    HouseModel.fromSnapshot(snapshot.data!.docs[index]));
+                    HouseShareModel.fromSnapshot(snapshot.data!.docs[index]));
               }
               if (data["cidade"]
                   .toString()
                   .toLowerCase()
                   .startsWith(search.toLowerCase())) {
-                return HouseTitle(HouseModel.fromMap(data));
+                return HouseTitle(HouseShareModel.fromMap(data));
               }
               return Container();
             },

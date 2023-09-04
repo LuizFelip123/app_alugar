@@ -1,4 +1,4 @@
-import 'package:app_alugar/models/house_model.dart';
+import 'package:app_alugar/models/house_share_model.dart';
 import 'package:app_alugar/models/user_model.dart';
 import 'package:app_alugar/screens/titles/house_title.dart';
 import 'package:app_alugar/screens/titles/myhouse_title.dart';
@@ -13,7 +13,7 @@ class MyHousesScreen extends StatefulWidget {
 }
 
 class _MyHousesScreenState extends State<MyHousesScreen> {
-  List<HouseModel> _myHousModels = [];
+  List<HouseShareModel> _myHousModels = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +68,7 @@ class _MyHousesScreenState extends State<MyHousesScreen> {
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (context, index) {
                       _myHousModels.add(
-                          HouseModel.fromSnapshot(snapshot.data!.docs[index]));
+                          HouseShareModel.fromSnapshot(snapshot.data!.docs[index]));
 
                       return MyHouseTitle(_myHousModels[index], _delete);
                     },

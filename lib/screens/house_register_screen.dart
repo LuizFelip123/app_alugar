@@ -1,7 +1,6 @@
 import 'dart:ffi';
 
 import 'package:app_alugar/controllers/localizacao_controller.dart';
-import 'package:app_alugar/models/house_model.dart';
 import 'package:app_alugar/models/house_share_model.dart';
 import 'package:app_alugar/models/user_model.dart';
 import 'package:flutter/material.dart';
@@ -220,7 +219,7 @@ class _HouseRegisterScreenState extends State<HouseRegisterScreen> {
 
                     model.saveHouse({
                       "descricao": _descricaoController.text,
-                      "valor": _valorController.text,
+                      "valor": double.parse( _valorController.text),
                       "imagens": imagesFormat,
                       "estado": selectedEstado,
                       "cidade": selectedCidade,
