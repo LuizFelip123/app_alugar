@@ -161,11 +161,10 @@ class _HouseScreenState extends State<HouseScreen> {
       ),
       floatingActionButton: UserModel.of(context).isLoggedIn()
           ? FloatingActionButton(
-              onPressed: () {
-                UserModel.of(context)
-                    .addFavorite(widget._houseModel.cid!)
-                    .then((value) {
-                  if (value == true) {
+              onPressed: ()async {
+                 bool value = await UserModel.of(context).addFavorite(widget._houseModel.cid!);
+                 print("Verificar o valor se adicionou : $value");
+                 if (value == true) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text("Casa Adicionado nos Favoritos!",
                           style: TextStyle(color: Colors.white)),
@@ -184,7 +183,6 @@ class _HouseScreenState extends State<HouseScreen> {
                       backgroundColor: Colors.black,
                     ));
                   }
-                });
               },
               backgroundColor: Colors.black,
               child: Icon(

@@ -44,7 +44,7 @@ class HouseShareModel extends Model {
     cidade = map['cidade'];
     descricao = map['descricao'];
     estado = map['estado'];
-    valor = double.parse(map['valor']);
+    valor = map['valor'];
     interested = map["interested"];
     _generoConvivente = map["genero"];
     _quant = int.tryParse(map["quant"]);

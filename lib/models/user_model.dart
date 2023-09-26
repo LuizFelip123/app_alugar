@@ -150,8 +150,7 @@ class UserModel extends Model {
   }
 
   Future<bool> addFavorite(String $id) async {
-    final doc =
-        await FirebaseFirestore.instance.collection("users").doc(uid()).get();
+    final doc = await FirebaseFirestore.instance.collection("users").doc(uid()).get();
     List lista = doc["favorite"];
     if (!lista.contains($id)) {
       lista.add($id);
@@ -162,12 +161,14 @@ class UserModel extends Model {
       await HouseShareModel.findById($id).then((value) {
         favorites.add(value);
         notifyListeners();
-        return true;
-      });
-    }
-    notifyListeners();
 
-    return false;
+      });
+      return true;
+    }
+      return false;
+    
+    
+    
   }
 
   updateUser(String email, String name) async {

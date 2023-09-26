@@ -59,6 +59,15 @@ class _HouseFavoriteListState extends State<HouseFavoriteList> {
             ),
           )
         : ScopedModelDescendant<UserModel>(builder: (context, child, model) {
+            if (model.favorites.length == 0) {
+              return Center(
+                child: Text(
+                  "Não há Casas Salvas",
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+              );
+            }
             return ListView.builder(
               itemCount: model.favorites.length,
               itemBuilder: (context, index) {
