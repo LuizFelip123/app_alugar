@@ -7,6 +7,7 @@ import 'package:app_alugar/screens/titles/house_title.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+
 class HouseList extends StatefulWidget {
   HouseShareController _userController = HouseShareController();
    HouseList({super.key});
@@ -21,12 +22,12 @@ class _HouseListState extends State<HouseList> {
   late List<HouseShareModel> listHouseShareModel;
   
    @override
-  void initState() {
+  void initState()async {
     super.initState();
-    _loadHouses();
+     _loadHouses();
   }
 
-  _loadHouses()async{
+  _loadHouses() async{
    listHouseShareModel =  await widget._userController.getAllHouseShare();
 
    setState(() {
@@ -37,21 +38,17 @@ class _HouseListState extends State<HouseList> {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        BarraBusca(_searchFirebase),
+        BarraBusca((text) => null),
         Padding(padding: EdgeInsets.only(top: 20)),
         ListView.builder(
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
           itemCount: listHouseShareModel.length,
           itemBuilder: (context, index) {
-            var data = listHouseShareModel[index].toMap();
+          
 
-            if (search.isEmpty ||
-                data["cidade"]
-                    .toString()
-                    .toLowerCase()
-                    .startsWith(search.toLowerCase())) {
-              return HouseTitle(houseShareList[index]);
+            if (listHouseShareModel.length >=1 ) {
+              return HouseTitle(listHouseShareModel[index]);
             }
 
             return Container();
@@ -62,9 +59,12 @@ class _HouseListState extends State<HouseList> {
   }
 
 
-  _searchFireBase(String text) {
+  searchFireBase(String text) {
     setState(() {
       search = text;
     });
   }
 }
+
+
+
