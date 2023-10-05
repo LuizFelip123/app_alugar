@@ -1,5 +1,5 @@
-import 'package:app_alugar/models/city_model.dart';
-import 'package:app_alugar/models/state_model.dart';
+import 'package:app_alugar/model/city_model.dart';
+import 'package:app_alugar/model/state_model.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;

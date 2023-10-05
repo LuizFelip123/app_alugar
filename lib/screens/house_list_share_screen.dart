@@ -1,4 +1,4 @@
-import 'package:app_alugar/models/house_share_model.dart';
+import 'package:app_alugar/model/house_share_model.dart';
 import 'package:app_alugar/screens/titles/house_title.dart';
 import 'package:app_alugar/screens/widgets/custom_barra.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

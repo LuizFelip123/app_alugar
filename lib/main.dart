@@ -1,5 +1,5 @@
-import 'package:app_alugar/models/house_share_model.dart';
-import 'package:app_alugar/models/user_model.dart';
+import 'package:app_alugar/model/house_share_model.dart';
+import 'package:app_alugar/model/user_model.dart';
 import 'package:app_alugar/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';

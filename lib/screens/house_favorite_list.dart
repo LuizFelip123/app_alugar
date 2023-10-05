@@ -1,4 +1,4 @@
-import 'package:app_alugar/models/user_model.dart';
+import 'package:app_alugar/model/user_model.dart';
 import 'package:app_alugar/screens/login_screen.dart';
 import 'package:app_alugar/screens/titles/favorite_title.dart';
 import 'package:app_alugar/screens/titles/house_title.dart';

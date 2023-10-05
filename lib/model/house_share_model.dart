@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:app_alugar/models/house_share_model.dart';
-import 'package:app_alugar/models/user_model.dart';
+import 'package:app_alugar/model/house_share_model.dart';
+import 'package:app_alugar/model/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
