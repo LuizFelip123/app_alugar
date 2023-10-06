@@ -1,44 +1,41 @@
 import 'package:app_alugar/controller/house_share_controller.dart';
-import 'package:app_alugar/controller/user_controller.dart';
 import 'package:app_alugar/model/house_share_model.dart';
-import 'package:app_alugar/screens/home_screen.dart';
-import 'package:app_alugar/screens/widgets/custom_barra.dart';
-import 'package:app_alugar/screens/titles/house_title.dart';
-import 'package:flutter/material.dart';
+import 'package:app_alugar/screen/titles/house_title.dart';
+import 'package:app_alugar/screen/widgets/custom_barra.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
+class HouseListShareScreen extends StatefulWidget {
+   HouseShareController _userController = HouseShareController();
 
-class HouseList extends StatefulWidget {
-  HouseShareController _userController = HouseShareController();
-   HouseList({super.key});
-
+   HouseListShareScreen({super.key});
 
   @override
-  State<HouseList> createState() => _HouseListState();
+  State<HouseListShareScreen> createState() => _HouseListShareScreenState();
 }
 
-class _HouseListState extends State<HouseList> {
-  String search = "";
-  late List<HouseShareModel> listHouseShareModel;
+class _HouseListShareScreenState extends State<HouseListShareScreen> {
+ String search = "";
+  late List<HouseShareModel> listHouseShareModel = [];
   
    @override
-  void initState()async {
+  void initState() {
     super.initState();
      _loadHouses();
   }
 
-  _loadHouses() async{
-   listHouseShareModel =  await widget._userController.getAllHouseShare();
-
-   setState(() {
-     listHouseShareModel;
-   });
+  _loadHouses() {
+    widget._userController.getAllHouseShare().then((value){
+      setState(() {
+        listHouseShareModel = value;
+      });
+    });
   }
    @override
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        BarraBusca((text) => null),
+        BarraBusca( searchFireBase),
         Padding(padding: EdgeInsets.only(top: 20)),
         ListView.builder(
           shrinkWrap: true,
@@ -47,7 +44,7 @@ class _HouseListState extends State<HouseList> {
           itemBuilder: (context, index) {
           
 
-            if (listHouseShareModel.length >=1 ) {
+            if (listHouseShareModel.isNotEmpty ) {
               return HouseTitle(listHouseShareModel[index]);
             }
 
@@ -65,6 +62,3 @@ class _HouseListState extends State<HouseList> {
     });
   }
 }
-
-
-

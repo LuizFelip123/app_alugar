@@ -10,7 +10,7 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  bool? hire = true;
+
   final _formkey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
@@ -61,7 +61,6 @@ class _SignupScreenState extends State<SignupScreen> {
                             Map<String, dynamic> userData = {
                               "name": _nameController.text,
                               "email": _emailController.text,
-                              "hide": hire,
                               "interested": []
                             };
                             model.signup(
@@ -162,29 +161,7 @@ class _SignupScreenState extends State<SignupScreen> {
             SizedBox(
               height: 20,
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    "Você Está Buscando Casa?",
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                Checkbox(
-                    checkColor: Colors.black,
-                    side: BorderSide(width: 3, color: Colors.black),
-                    value: hire,
-                    onChanged: (value) {
-                      if (value != null) {
-                        setState(() {
-                          hire = value;
-                        });
-                      }
-                    })
-              ],
-            )
+    
           ],
         ),
       ),

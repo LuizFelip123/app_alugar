@@ -1,6 +1,6 @@
 import 'package:app_alugar/model/house_share_model.dart';
 import 'package:app_alugar/model/user_model.dart';
-import 'package:app_alugar/screens/login_screen.dart';
+import 'package:app_alugar/screen/login_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 

@@ -20,6 +20,15 @@ class UserModel extends Model {
     _name = documentSnapshot["name"];
     _email = documentSnapshot["email"];
   }
+
+   Map<String, dynamic> toMap() {
+    return {
+          "name": _name,
+         "email": _email,
+        "interested": []
+    };
+  }
+
   UserModel();
   String? get name => _name;
   String? get email => _email;

@@ -1,5 +1,5 @@
 import 'package:app_alugar/model/user_model.dart';
-import 'package:app_alugar/screens/house_screen.dart';
+import 'package:app_alugar/screen/house_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

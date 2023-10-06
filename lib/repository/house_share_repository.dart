@@ -2,7 +2,7 @@ import 'package:app_alugar/model/house_share_model.dart';
 import 'package:app_alugar/repository/house_share_repository_interface.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class HouseShareRepository  extends IHouseShareRepository{
+class HouseShareRepository  implements IHouseShareRepository{
   final CollectionReference _housesCollection = FirebaseFirestore.instance.collection('houses');
   @override
   Future delete(String id) {
@@ -23,6 +23,8 @@ class HouseShareRepository  extends IHouseShareRepository{
       List<HouseShareModel> houses = querySnapshot.docs
           .map((doc) => HouseShareModel.fromSnapshot(doc))
           .toList();
+          if(houses.isNotEmpty)
+              print("Vazia a lista");
       return houses;
   }
 

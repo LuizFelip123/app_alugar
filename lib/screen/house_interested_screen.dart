@@ -1,6 +1,6 @@
 import 'package:app_alugar/model/house_share_model.dart';
 import 'package:app_alugar/model/user_model.dart';
-import 'package:app_alugar/screens/titles/house_interested_title.dart';
+import 'package:app_alugar/screen/titles/house_interested_title.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 

@@ -1,8 +1,8 @@
 import 'package:app_alugar/model/user_model.dart';
-import 'package:app_alugar/screens/login_screen.dart';
-import 'package:app_alugar/screens/titles/favorite_title.dart';
-import 'package:app_alugar/screens/titles/house_title.dart';
-import 'package:app_alugar/screens/titles/myhouse_title.dart';
+import 'package:app_alugar/screen/login_screen.dart';
+import 'package:app_alugar/screen/titles/favorite_title.dart';
+import 'package:app_alugar/screen/titles/house_title.dart';
+import 'package:app_alugar/screen/titles/myhouse_title.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';

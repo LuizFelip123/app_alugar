@@ -1,8 +1,13 @@
 
+import 'dart:ui';
+
 import 'package:app_alugar/model/user_model.dart';
 import 'package:app_alugar/repository/user_repository_interface.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class UserRepository extends IUserRepository {
+class UserRepository implements IUserRepository {
+  FirebaseAuth _auth = FirebaseAuth.instance;
   @override
   Future delete(String id) {
     // TODO: implement delete
@@ -16,9 +21,14 @@ class UserRepository extends IUserRepository {
   }
 
   @override
-  Future save(UserModel userModel) {
+  Future save(UserModel userModel) async {
     // TODO: implement save
-    throw UnimplementedError();
+    
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(userModel.uid())
+        .set(userModel.toMap())
+        .onError((error, stackTrace) {});
   }
 
   @override
@@ -27,6 +37,7 @@ class UserRepository extends IUserRepository {
     throw UnimplementedError();
   }
 
+ 
 
 
 }
