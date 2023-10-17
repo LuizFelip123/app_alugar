@@ -1,11 +1,10 @@
-import 'dart:ffi';
+
 
 import 'package:app_alugar/controller/localizacao_controller.dart';
 import 'package:app_alugar/model/house_share_model.dart';
 import 'package:app_alugar/model/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:scoped_model/scoped_model.dart';
 
 class HouseRegisterScreen extends StatefulWidget {
   const HouseRegisterScreen({super.key});
@@ -91,8 +90,7 @@ class _HouseRegisterScreenState extends State<HouseRegisterScreen> {
                                   child: Text("Nenhum"), value: "Nenhum"));
                               selectedCidade = "Nenhum";
                             });
-                            final cidades = await controller
-                                .getCitysForStats(selectedEstado);
+                            final cidades = await controller.getCitysByStats(selectedEstado);
                             await _initCidade(cidades);
                             setState(() {
                               menuCidade;

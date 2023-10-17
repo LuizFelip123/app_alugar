@@ -1,6 +1,5 @@
-import 'package:app_alugar/screen/house_screen.dart';
 import 'package:app_alugar/screen/tabs/house_list_tab.dart';
-import 'package:app_alugar/screen/user_screen.dart';
+import 'package:app_alugar/screen/user/user_screen.dart';
 import 'package:app_alugar/screen/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 

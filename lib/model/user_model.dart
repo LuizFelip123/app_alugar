@@ -30,6 +30,10 @@ class UserModel extends Model {
   }
 
   UserModel();
+  User? get user => _user;
+  set user (User? user) {
+    _user = user;
+  }
   String? get name => _name;
   String? get email => _email;
   void signup(
@@ -69,7 +73,7 @@ class UserModel extends Model {
         .then((value) async {
       _user = value.user;
 
-      await _loadCurrentUser();
+      await loadCurrentUser();
       onSuccess();
       isLoading = false;
       notifyListeners();
@@ -110,7 +114,7 @@ class UserModel extends Model {
         .onError((error, stackTrace) {});
   }
 
-  Future _loadCurrentUser() async {
+  Future loadCurrentUser() async {
     if (_user == null) {
       _user == _auth.currentUser;
     }

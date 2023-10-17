@@ -1,12 +1,11 @@
 import 'package:app_alugar/model/city_model.dart';
 import 'package:app_alugar/model/state_model.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
 class LocalizacaoController {
-  String urlIBGE =
-      "https://servicodados.ibge.gov.br/api/v1/localidades/estados";
+  String urlIBGE = "https://servicodados.ibge.gov.br/api/v1/localidades/estados";
 
   static final LocalizacaoController _singleton =
       LocalizacaoController._internal();
@@ -29,7 +28,7 @@ class LocalizacaoController {
     }
     return states;
   }
-  Future<List<CityModel>> getCitysForStats(String? sigla) async {
+  Future<List<CityModel>> getCitysByStats(String? sigla) async {
     List<CityModel> citys = [];
 
        final uriCity  =     Uri.parse(urlIBGE + "/${sigla}/municipios");

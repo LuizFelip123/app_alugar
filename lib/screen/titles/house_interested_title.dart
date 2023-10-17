@@ -1,4 +1,4 @@
-import 'package:app_alugar/screen/interested_screen.dart';
+import 'package:app_alugar/screen/user/interested_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

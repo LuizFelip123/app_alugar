@@ -1,9 +1,9 @@
 import 'package:app_alugar/model/user_model.dart';
-import 'package:app_alugar/screen/house_interested_screen.dart';
-import 'package:app_alugar/screen/house_register_screen.dart';
-import 'package:app_alugar/screen/login_screen.dart';
-import 'package:app_alugar/screen/my_houses_screen.dart';
-import 'package:app_alugar/screen/user_edit_screen.dart';
+import 'package:app_alugar/screen/house/house_interested_screen.dart';
+import 'package:app_alugar/screen/house/house_register_screen.dart';
+import 'package:app_alugar/screen/user/login_screen.dart';
+import 'package:app_alugar/screen/house/my_houses_screen.dart';
+import 'package:app_alugar/screen/user/user_edit_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -279,6 +279,7 @@ class _UserScreenState extends State<UserScreen> {
                                   Text(
                                     "Minhas Informações",
                                     style: TextStyle(
+                                      fontSize: 12,
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold),
                                   ),

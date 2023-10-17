@@ -1,13 +1,12 @@
 
-import 'dart:ui';
 
 import 'package:app_alugar/model/user_model.dart';
 import 'package:app_alugar/repository/user_repository_interface.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
-class UserRepository implements IUserRepository {
-  FirebaseAuth _auth = FirebaseAuth.instance;
+class UserRepository  implements IUserRepository {
+
   @override
   Future delete(String id) {
     // TODO: implement delete

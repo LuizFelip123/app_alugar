@@ -1,5 +1,5 @@
 import 'package:app_alugar/model/user_model.dart';
-import 'package:app_alugar/screen/login_screen.dart';
+import 'package:app_alugar/screen/user/login_screen.dart';
 import 'package:app_alugar/screen/titles/drawer_title.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
