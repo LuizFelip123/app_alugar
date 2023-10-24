@@ -1,3 +1,4 @@
+import 'package:app_alugar/controller/user_controller.dart';
 import 'package:app_alugar/model/user_model.dart';
 import 'package:app_alugar/screen/house/house_interested_screen.dart';
 import 'package:app_alugar/screen/house/house_register_screen.dart';
@@ -5,6 +6,7 @@ import 'package:app_alugar/screen/user/login_screen.dart';
 import 'package:app_alugar/screen/house/my_houses_screen.dart';
 import 'package:app_alugar/screen/user/user_edit_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class UserScreen extends StatefulWidget {
@@ -15,12 +17,16 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
-  
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: ScopedModelDescendant<UserModel>(builder: (context, child, model) {
-         if(!model.isLoggedIn()){
+      child:  Consumer<UserController>(builder: (context, userController, child) {
+         if(!userController.isLogin){
             return  Container(
             padding: EdgeInsets.all(16),
             child: Column(

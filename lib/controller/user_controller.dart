@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:isolate';
 
 import 'package:app_alugar/model/user_model.dart';
 import 'package:app_alugar/service/user_service.dart';
@@ -6,9 +7,9 @@ import 'package:flutter/material.dart';
 
 class UserController extends ChangeNotifier {
   final UserService _userService = UserService();
-  UserModel _userModel = UserModel();
-
-  UserModel get userMOdal => _userModel;
+  final _userModel = UserModel();
+bool isLogin = false ;
+  UserModel get userModal => _userModel;
   Future signin(
       {required String email,
       required String pass,
@@ -18,12 +19,17 @@ class UserController extends ChangeNotifier {
       try {
         
       _userModel.user  = await _userService.signin(email: email, pass: pass, onSuccess: onSuccess, onFail: onFail);
-      _userModel.loadCurrentUser();
+      
+      await _userModel.loadCurrentUser();
+
       onSuccess();
+      isLogin = true;
       _userModel.isLoading = false;
+       notifyListeners();
       } catch (e) {
         
       _userModel.isLoading = false;
+       isLogin = false;
         onFail();
         
       }

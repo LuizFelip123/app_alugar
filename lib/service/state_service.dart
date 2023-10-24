@@ -1,8 +1,10 @@
 import 'package:app_alugar/model/state_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
+
 class StateService {
- final  String _urlIBGE = "https://servicodados.ibge.gov.br/api/v1/localidades/estados";
+  final String _urlIBGE =
+      "https://servicodados.ibge.gov.br/api/v1/localidades/estados";
 
   Future<List<StateModel>> getStates() async {
     List<StateModel> states = [];

@@ -1,18 +1,27 @@
+import 'package:app_alugar/controller/house_share_controller.dart';
+import 'package:app_alugar/controller/user_controller.dart';
 import 'package:app_alugar/model/user_model.dart';
 import 'package:app_alugar/screen/user/signup_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
-
-  @override
+  UserController  userController = UserController();
   State<LoginScreen> createState() => _LoginScreenState();
 }
-
+ 
 class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+      widget.userController   = Provider.of<UserController>(context, listen: false);
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,8 +38,8 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       body: ListView(
         children: [
-          ScopedModelDescendant<UserModel>(builder: (context, child, model) {
-            if (model.isLoading)
+     Consumer<UserController>(builder: (context, userController, child) {
+            if (userController.userModal.isLoading)
               return Padding(
                 padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height/3),
                 child: Center(
@@ -56,8 +65,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: ElevatedButton(
-                          onPressed: () {
-                            model.signin(
+                          onPressed: () async{
+                           await widget.userController.signin(
                                 email: _emailController.text,
                                 pass: _passController.text,
                                 onSuccess: _onSuccess,

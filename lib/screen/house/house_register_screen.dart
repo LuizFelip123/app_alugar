@@ -215,18 +215,7 @@ class _HouseRegisterScreenState extends State<HouseRegisterScreen> {
                   final model = HouseShareModel();
                     final imagesFormat = model.formatImagens(_images);
 
-                    model.saveHouse({
-                      "descricao": _descricaoController.text,
-                      "valor": double.parse( _valorController.text),
-                      "imagens": imagesFormat,
-                      "estado": selectedEstado,
-                      "cidade": selectedCidade,
-                      "shareHouse": true,
-                      "genero": selectedValue,
-                      "quant": _quantController.text,
-                      'interested': [],
-                      "user_id": UserModel.of(context).uid()
-                    });
+             
                   if (_images != null) {
                     _images!.clear();
                   }

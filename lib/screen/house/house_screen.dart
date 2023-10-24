@@ -17,9 +17,7 @@ class _HouseScreenState extends State<HouseScreen> {
   HouseShareModel? houseShareModel;
   @override
   Widget build(BuildContext context) {
-    if (widget._houseModel.shareHouse == true) {
-      houseShareModel = widget._houseModel as HouseShareModel;
-    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(

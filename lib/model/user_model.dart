@@ -7,7 +7,7 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class UserModel extends Model {
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseAuth  _auth = FirebaseAuth.instance;
   User? _user;
   String? _name;
   String? _email;
@@ -123,10 +123,11 @@ class UserModel extends Model {
         DocumentSnapshot docUser = await FirebaseFirestore.instance
             .collection("users")
             .doc(_user!.uid)
-            .get();
+            .get(); 
         userData["name"] = docUser["name"];
-        userData["hide"] = docUser["hide"];
         userData["email"] = docUser["email"];
+       print(userData["name"]);
+       print(userData["email"]);
         favorites.clear();
         for (var element in docUser['favorite']) {
           await HouseShareModel.findById(element).then((value) {

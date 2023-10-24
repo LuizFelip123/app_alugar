@@ -1,7 +1,9 @@
+import 'package:app_alugar/controller/user_controller.dart';
 import 'package:app_alugar/model/user_model.dart';
 import 'package:app_alugar/screen/user/login_screen.dart';
 import 'package:app_alugar/screen/titles/drawer_title.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -16,8 +18,8 @@ class CustomDrawer extends StatelessWidget {
       child: Stack(
         children: [
           _buildDrawerBack(),
-          ScopedModelDescendant<UserModel>(
-            builder: (context, child, model) {
+        
+        Consumer<UserController>(builder: (context, userController, child)  {
               return ListView(
                 children: [
                   Container(
@@ -51,7 +53,7 @@ class CustomDrawer extends StatelessWidget {
                               Padding(
                                   padding: EdgeInsets.only(left: 8.0),
                                   child: Text(
-                                    "Olá, ${model.isLoggedIn() ? model.userData['name'] : ""}",
+                                    "Olá, ${userController.userModal.isLoggedIn() ? userController.userModal.userData['name'] : ""}",
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
@@ -61,7 +63,7 @@ class CustomDrawer extends StatelessWidget {
                                 padding: const EdgeInsets.all(8.0),
                                 child: GestureDetector(
                                   onTap: () {
-                                    if (!model.isLoggedIn()) {
+                                    if (!userController.userModal.isLoggedIn()) {
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: (context) =>
@@ -69,7 +71,7 @@ class CustomDrawer extends StatelessWidget {
                                     }
                                   },
                                   child: Text(
-                                    !model.isLoggedIn()
+                                    !  userController.userModal.isLoggedIn()
                                         ? "Cadastre-se ou entre na sua conta"
                                         : "",
                                     style: TextStyle(
@@ -98,7 +100,7 @@ class CustomDrawer extends StatelessWidget {
                     page: 1,
                   ),
             
-                  model.isLoggedIn()
+                  userController.userModal .isLoggedIn()
                       ? DrawerTile(
                         icon: Icons.output,
                         text: "Sair",
