@@ -9,7 +9,6 @@ import 'package:scoped_model/scoped_model.dart';
 
 class HouseShareModel extends Model {
   String? cid;
-  bool? shareHouse;
   String? descricao;
   double? valor;
   String? cidade;
@@ -23,14 +22,13 @@ class HouseShareModel extends Model {
   HouseShareModel();
   HouseShareModel.fromSnapshot(DocumentSnapshot snapshot) {
     cid = snapshot.id;
-    shareHouse = snapshot["shareHouse"];
     cidade = snapshot['cidade'];
     descricao = snapshot['descricao'];
     estado = snapshot['estado'];
     valor = snapshot['valor'];
     interested = snapshot["interested"];
     generoConvivente = snapshot["genero"];
-    quant = int.tryParse(snapshot["quant"]);
+    quant = snapshot["quant"];
       print(snapshot["quant"]);
       print(snapshot["genero"]);
     print(snapshot["valor"]);
@@ -40,7 +38,6 @@ class HouseShareModel extends Model {
   }
   HouseShareModel.fromMap(Map<String, dynamic> map) {
     cid = map['id'];
-    shareHouse = map["shareHouse"];
     cidade = map['cidade'];
     descricao = map['descricao'];
     estado = map['estado'];
@@ -48,11 +45,23 @@ class HouseShareModel extends Model {
     interested = map["interested"];
     generoConvivente = map["genero"];
     quant = int.tryParse(map["quant"]);
-    for (String imgs in map["imagens"]) {
-      imgsLink.add(imgs);
-    }
+   imgsFile = formatImag(map["imagens"]);
+
   }
 
+ toMap(){
+
+    return {
+      "descricao" : descricao,
+      "estado": estado,
+      "valor": valor,
+      "interested" : [],
+      "genero" : generoConvivente,
+      "quant":quant,
+      "cidade":cidade,
+      "imagens": imgsLink
+    };
+ }
 
 
   void saveHouse(Map<String, dynamic> houseData) async {
@@ -71,7 +80,7 @@ class HouseShareModel extends Model {
     });
   }
 
-  List<File> formatImagens(List<PickedFile>? images) {
+  List<File> formatImag(List<PickedFile>? images) {
     if (images!.isNotEmpty) {
       for (PickedFile image in images) {
         imgsFile.add(File(image.path));

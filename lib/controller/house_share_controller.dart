@@ -11,6 +11,10 @@ class HouseShareController extends ChangeNotifier {
    Future<void> getAllHouseShare() async {
     _houses = await  _houseShareService.getAllHouseShareModel();
     notifyListeners();
+    }
+   save(HouseShareModel houseShareModel){
+     _houseShareService.save( houseShareModel);
   }
+
 
 }

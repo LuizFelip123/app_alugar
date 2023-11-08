@@ -15,7 +15,7 @@ class UserService {
         .then((value) async {
       user = value.user;
 
-      onSuccess(); 
+      onSuccess();
     }).catchError((e) {
       onFail();
     });
@@ -40,6 +40,11 @@ class UserService {
     userModel.userData = {};
     userModel.favorites = [];
     userModel.user = null;
+  }
+
+  String? getUserId(){
+    User? user = _auth.currentUser;
+    return user?.uid;
   }
 
 }

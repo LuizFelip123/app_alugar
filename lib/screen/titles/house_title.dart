@@ -43,7 +43,7 @@ class HouseTitle extends StatelessWidget {
                         color: Colors.grey,
                         fontWeight: FontWeight.bold),
                   ),
-
+                  Text(_houseModel.cidade!),
                    Padding(padding: EdgeInsets.only(top: 6)),
                   Text(
                     'R\$ ${_houseModel.valor!.toStringAsFixed(2).replaceAll('.', ",")}',

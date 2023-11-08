@@ -33,16 +33,18 @@ class HouseShareRepository implements IHouseShareRepository {
   }
 
   @override
-  Future save(HouseShareModel houseShareModel) async {
+  Future save(HouseShareModel houseShareModel, String? idUser) async {
     await _saveImgs(houseShareModel.imgsFile).then((value) async {
       final urls = value;
-      try {
-        houseShareModel.houseData['imagens'] = urls;
+       Map<String, dynamic>  mapHouse = houseShareModel.toMap();
+       mapHouse["user_id"] = idUser;
+       mapHouse["imagens"] = value;
 
+      try {
         await FirebaseFirestore.instance
             .collection("houses")
             .doc()
-            .set(houseShareModel.houseData);
+            .set(mapHouse);
       } catch (e) {
         print("Erro = $e");
       }

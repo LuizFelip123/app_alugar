@@ -1,12 +1,14 @@
 
 
 import 'package:app_alugar/controller/city_controller.dart';
+import 'package:app_alugar/controller/house_share_controller.dart';
 import 'package:app_alugar/controller/localizacao_controller.dart';
 import 'package:app_alugar/controller/state_controller.dart';
 import 'package:app_alugar/model/house_share_model.dart';
 import 'package:app_alugar/model/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class HouseRegisterScreen extends StatefulWidget {
   const HouseRegisterScreen({super.key});
@@ -22,11 +24,13 @@ class _HouseRegisterScreenState extends State<HouseRegisterScreen> {
   final controller = LocalizacaoController();
   final cityController = CityController();
   final stateController = StateController();
+   late HouseShareController houseShareController ;
   String selectedValue = "Ambos Gênero";
   String selectedEstado = "Nenhum";
   String selectedCidade = "Nenhum";
   final _valorController = TextEditingController();
   final _descricaoController = TextEditingController();
+
   final _quantController = TextEditingController();
   List<PickedFile>? _images;
   List<DropdownMenuItem<String>> menuCidade = [
@@ -44,6 +48,7 @@ class _HouseRegisterScreenState extends State<HouseRegisterScreen> {
   @override
   void initState() {
     // TODO: implement initState
+    houseShareController =  Provider.of<HouseShareController>(context, listen: false);
     stateController.getStates().then((value) {
       _estados = value;
       for (int i = 0; i < _estados!.length; i++) {
@@ -216,10 +221,18 @@ class _HouseRegisterScreenState extends State<HouseRegisterScreen> {
               padding: const EdgeInsets.only(bottom: 15),
               child: ElevatedButton(
                 onPressed: () {
-                  final model = HouseShareModel();
-                    final imagesFormat = model.formatImagens(_images);
+                  final model = HouseShareModel.fromMap({
+                    "descricao": _descricaoController.text,
+                    "valor": double.parse( _valorController.text),
+                    "imagens": _images,
+                    "estado": selectedEstado,
+                    "cidade": selectedCidade,
+                    "genero": selectedValue,
+                    "quant": _quantController.text,
+                    "interested": [],
 
-             
+                  });
+                  houseShareController.save(model);
                   if (_images != null) {
                     _images!.clear();
                   }

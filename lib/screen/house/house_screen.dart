@@ -75,8 +75,8 @@ class _HouseScreenState extends State<HouseScreen> {
                 SizedBox(
                   height: 18.0,
                 ),
-                widget._houseModel.shareHouse == true
-                    ? Column(
+
+                    Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -93,7 +93,7 @@ class _HouseScreenState extends State<HouseScreen> {
                           ),
                         ],
                       )
-                    : Container(),
+                    ,
                 !UserModel.of(context).isLoggedIn()
                     ? ElevatedButton(
                         onPressed: () {
@@ -106,7 +106,7 @@ class _HouseScreenState extends State<HouseScreen> {
                               .then((_) {
                             setState(() {});
                           });
-                          ;
+
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.black),
