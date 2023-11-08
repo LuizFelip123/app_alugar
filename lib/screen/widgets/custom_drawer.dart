@@ -69,7 +69,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                               Padding(
                                   padding: EdgeInsets.only(left: 8.0),
                                   child: Text(
-                                    "Olá, ${userController.userModal.isLoggedIn() ? userController.userModal.userData['name'] : ""}",
+                                    "Olá, ${userController.isLogin ? userController.userModal.userData['name'] : ""}",
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,

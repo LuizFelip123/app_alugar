@@ -35,8 +35,7 @@ class UserController extends ChangeNotifier {
   }
   signOut(){
     isLogin = false;
-    _userModel.signOut();
-    print("Desconectar");
+    _userService.signOut(_userModel);
     notifyListeners();
   }
 

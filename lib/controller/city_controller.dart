@@ -9,7 +9,7 @@ class CityController extends ChangeNotifier{
   final _cityService = CityService();
   List<CityModel> _citys = [];
   UnmodifiableListView<CityModel> get houses => UnmodifiableListView(_citys);
-  Future<void> getCitysByState(String? sigla) async {
-    _citys = await _cityService.getCitysByState(sigla);
+  Future<List<CityModel>> getCitysByState(String? sigla) async {
+    return await _cityService.getCitysByState(sigla);
   }
 }

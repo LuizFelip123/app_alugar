@@ -1,6 +1,8 @@
 
 
+import 'package:app_alugar/controller/city_controller.dart';
 import 'package:app_alugar/controller/localizacao_controller.dart';
+import 'package:app_alugar/controller/state_controller.dart';
 import 'package:app_alugar/model/house_share_model.dart';
 import 'package:app_alugar/model/user_model.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,8 @@ class _HouseRegisterScreenState extends State<HouseRegisterScreen> {
   List? _estados;
   List? _cidades;
   final controller = LocalizacaoController();
+  final cityController = CityController();
+  final stateController = StateController();
   String selectedValue = "Ambos Gênero";
   String selectedEstado = "Nenhum";
   String selectedCidade = "Nenhum";
@@ -40,8 +44,7 @@ class _HouseRegisterScreenState extends State<HouseRegisterScreen> {
   @override
   void initState() {
     // TODO: implement initState
-
-    controller.getStates().then((value) {
+    stateController.getStates().then((value) {
       _estados = value;
       for (int i = 0; i < _estados!.length; i++) {
         menuEstados.add(DropdownMenuItem(
@@ -49,6 +52,7 @@ class _HouseRegisterScreenState extends State<HouseRegisterScreen> {
             value: _estados![i].sigla.toString()));
       }
     });
+
 
     super.initState();
   }
@@ -90,7 +94,7 @@ class _HouseRegisterScreenState extends State<HouseRegisterScreen> {
                                   child: Text("Nenhum"), value: "Nenhum"));
                               selectedCidade = "Nenhum";
                             });
-                            final cidades = await controller.getCitysByStats(selectedEstado);
+                            final cidades = await cityController.getCitysByState(selectedEstado);
                             await _initCidade(cidades);
                             setState(() {
                               menuCidade;

@@ -35,4 +35,11 @@ class UserService {
     user = await _auth.signInWithEmailAndPassword(email: email, password: pass);
     return user.user;
   }
+  signOut (UserModel userModel) async {
+    await _auth.signOut();
+    userModel.userData = {};
+    userModel.favorites = [];
+    userModel.user = null;
+  }
+
 }
