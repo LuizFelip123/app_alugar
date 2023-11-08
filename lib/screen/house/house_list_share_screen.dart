@@ -36,8 +36,8 @@ class _HouseListShareScreenState extends State<HouseListShareScreen> {
       children: [
         BarraBusca(searchFireBase),
         Padding(padding: EdgeInsets.only(top: 20)),
-        Consumer<HouseShareController>(builder: (context, houseshare, child) {
-          return houseshare.houses.isEmpty
+        Consumer<HouseShareController>(builder: (context, houseShare, child) {
+          return houseShare.houses.isEmpty
               ? Container(
                   child: Center(
                     child: Text("Está vazia o lista"),
@@ -46,9 +46,9 @@ class _HouseListShareScreenState extends State<HouseListShareScreen> {
               : ListView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
-                  itemCount: houseshare.houses.length,
+                  itemCount: houseShare.houses.length,
                   itemBuilder: (_, index) {
-                    return HouseTitle(houseshare.houses[index]);
+                    return HouseTitle(houseShare.houses[index]);
                   },
                 );
         }),

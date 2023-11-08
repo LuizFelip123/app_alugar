@@ -1,12 +1,14 @@
+import 'package:app_alugar/model/house_share_model.dart';
 import 'package:app_alugar/screen/house/house_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HouseTitle extends StatelessWidget {
-  final  _houseModel;
-  HouseTitle(this._houseModel,);
+  final HouseShareModel  _houseModel;
+  HouseTitle(this._houseModel);
   @override
   Widget build(BuildContext context) {
+
     final row = SafeArea(
       top: false,
       bottom: false,
@@ -29,20 +31,20 @@ class HouseTitle extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
+              padding:  EdgeInsets.symmetric(horizontal: 12),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  const Text(
+                   Text(
                     "Casa",
                     style: TextStyle(
                         fontSize: 18,
                         color: Colors.grey,
                         fontWeight: FontWeight.bold),
                   ),
-                  Text(_houseModel.cidade!),
-                  const Padding(padding: EdgeInsets.only(top: 6)),
+
+                   Padding(padding: EdgeInsets.only(top: 6)),
                   Text(
                     'R\$ ${_houseModel.valor!.toStringAsFixed(2).replaceAll('.', ",")}',
                   )
@@ -59,7 +61,7 @@ class HouseTitle extends StatelessWidget {
                 ),
               );
             },
-            child: const Icon(
+            child:  Icon(
               CupertinoIcons.arrow_right_square_fill,
               size: 35,
             ),

@@ -80,13 +80,13 @@ class _HouseScreenState extends State<HouseScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Apenas : " + houseShareModel!.genero!,
+                            "Apenas : " + widget._houseModel!.generoConvivente!,
                           ),
                           SizedBox(
                             height: 10.0,
                           ),
                           Text(
-                            "vagas : " + houseShareModel!.quant.toString(),
+                            "vagas : " + widget._houseModel!.quant.toString(),
                           ),
                           SizedBox(
                             height: 10.0,

@@ -8,31 +8,32 @@ import 'package:image_picker/image_picker.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class HouseShareModel extends Model {
-  String? _cid;
-  bool? _shareHouse;
-  String? _descricao;
-  double? _valor;
-  String? _cidade;
-  String? _estado;
-  String? get descricao => _descricao;
-  List<File> _imgsFile = [];
-  List<String> _imgsLink = [];
-  Map<String, dynamic> _houseData = {};
-  List<dynamic> _interested = [];
-  String? _generoConvivente;
-  int? _quant;
+  String? cid;
+  bool? shareHouse;
+  String? descricao;
+  double? valor;
+  String? cidade;
+  String? estado;
+  List<File> imgsFile = [];
+  List<String> imgsLink = [];
+  Map<String, dynamic> houseData = {};
+  List<dynamic> interested = [];
+  String? generoConvivente;
+  int? quant;
   HouseShareModel();
   HouseShareModel.fromSnapshot(DocumentSnapshot snapshot) {
     cid = snapshot.id;
     shareHouse = snapshot["shareHouse"];
-
     cidade = snapshot['cidade'];
     descricao = snapshot['descricao'];
     estado = snapshot['estado'];
     valor = snapshot['valor'];
     interested = snapshot["interested"];
-    _generoConvivente = snapshot["genero"];
-    _quant = int.tryParse(snapshot["quant"]);
+    generoConvivente = snapshot["genero"];
+    quant = int.tryParse(snapshot["quant"]);
+      print(snapshot["quant"]);
+      print(snapshot["genero"]);
+    print(snapshot["valor"]);
     for (String imgs in snapshot["imagens"]) {
       imgsLink.add(imgs);
     }
@@ -45,63 +46,14 @@ class HouseShareModel extends Model {
     estado = map['estado'];
     valor = map['valor'];
     interested = map["interested"];
-    _generoConvivente = map["genero"];
-    _quant = int.tryParse(map["quant"]);
+    generoConvivente = map["genero"];
+    quant = int.tryParse(map["quant"]);
     for (String imgs in map["imagens"]) {
       imgsLink.add(imgs);
     }
   }
-  String? get genero => _generoConvivente;
-  int? get quant => _quant;
-   set shareHouse(bool? shareHouse) {
-    _shareHouse = shareHouse;
-  }
 
-  set valor(double? valor) {
-    _valor = valor;
-  }
 
-  set cid(String? cid) {
-    _cid = cid;
-  }
-
-  set descricao(String? descricao) {
-    _descricao = descricao;
-  }
-
-  set cidade(String? cidade) {
-    _cidade = cidade;
-  }
-
-  set estado(String? estado) {
-    _estado = estado;
-  }
-
-  set imgsFile(List<File> imgsFile) {
-    _imgsFile = imgsFile;
-  }
-
-  set houseData(Map<String, dynamic> map) {
-    _houseData = map;
-  }
-
-  set imgsLink(List<String> imgsLink) {
-    _imgsLink = imgsLink;
-  }
-
-  set interested(List<dynamic> interested) {
-    _interested = interested;
-  }
-
-  bool? get shareHouse => _shareHouse;
-  double? get valor => _valor;
-  String? get cid => _cid;
-  String? get cidade => _cidade;
-  String? get estado => _estado;
-  List<File> get imgsFile => _imgsFile;
-  Map<String, dynamic> get houseData => _houseData;
-  List<String> get imgsLink => _imgsLink;
-  List<dynamic> get interested => _interested;
 
   void saveHouse(Map<String, dynamic> houseData) async {
     await _saveImgs().then((value) async {
@@ -122,16 +74,16 @@ class HouseShareModel extends Model {
   List<File> formatImagens(List<PickedFile>? images) {
     if (images!.isNotEmpty) {
       for (PickedFile image in images) {
-        _imgsFile.add(File(image.path));
+        imgsFile.add(File(image.path));
       }
     }
 
-    return _imgsFile;
+    return imgsFile;
   }
 
   Future<List> _saveImgs() async {
     List imgUrls = [];
-    for (var img in _imgsFile) {
+    for (var img in imgsFile) {
       Reference reference =
           FirebaseStorage.instance.ref().child(DateTime.now().toString());
       UploadTask uploadTask = reference.putFile(img);
