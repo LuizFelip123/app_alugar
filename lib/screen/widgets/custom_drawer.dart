@@ -6,19 +6,35 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-class CustomDrawer extends StatelessWidget {
+class CustomDrawer extends StatefulWidget {
+
+  UserController  userController = UserController();
   final pageController;
   CustomDrawer({required this.pageController});
+
+  @override
+  State<CustomDrawer> createState() => _CustomDrawerState();
+}
+
+class _CustomDrawerState extends State<CustomDrawer> {
   Widget _buildDrawerBack() => Container(
         color: Colors.black,
       );
+
+  @override
+  void initState() {
+    super.initState();
+    widget.userController = Provider.of<UserController>(context, listen: false);
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: Stack(
         children: [
           _buildDrawerBack(),
-        
+
         Consumer<UserController>(builder: (context, userController, child)  {
               return ListView(
                 children: [
@@ -90,21 +106,21 @@ class CustomDrawer extends StatelessWidget {
                   DrawerTile(
                     icon: Icons.home,
                     text: "Início",
-                    pageController: pageController,
+                    pageController: widget.pageController,
                     page: 0,
                   ),
                   DrawerTile(
                     icon: Icons.assignment_ind,
                     text: "Meu Perfil",
-                    pageController: pageController,
+                    pageController: widget.pageController,
                     page: 1,
                   ),
-            
-                  userController.userModal .isLoggedIn()
+
+                  userController.isLogin
                       ? DrawerTile(
                         icon: Icons.output,
                         text: "Sair",
-                        pageController: pageController,
+                        pageController: widget.pageController,
                         page: null,
                       )
                       : Container(),
