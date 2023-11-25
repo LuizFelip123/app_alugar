@@ -21,14 +21,10 @@ class HouseShareRepository implements IHouseShareRepository {
   @override
   Future<List<HouseShareModel>> getAll() async {
     // TODO: implement getAll
-    QuerySnapshot querySnapshot = await _housesCollection.get();
+    QuerySnapshot querySnapshot = await _housesCollection.orderBy("valor", descending: false).get();
     List<HouseShareModel> houses = querySnapshot.docs
         .map((doc) => HouseShareModel.fromSnapshot(doc))
         .toList();
-    for (var element in houses) {
-      print(element.cidade);
-    }
-    print("Veio aqui");
     return houses;
   }
 
@@ -75,4 +71,14 @@ class HouseShareRepository implements IHouseShareRepository {
     }
     return imgUrls;
   }
+
+  @override
+  Future<List<HouseShareModel>> findByState(String text) async {
+
+     QuerySnapshot querySnapshot =    await _housesCollection.orderBy("valor", descending: false).where("estado", isEqualTo: text).get();
+      return  querySnapshot.docs.map((e) {
+        return HouseShareModel.fromSnapshot(e);
+      }).toList();
+
+    }
 }

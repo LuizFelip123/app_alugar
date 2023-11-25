@@ -7,8 +7,7 @@ import 'package:flutter/material.dart';
 
 class CityController extends ChangeNotifier{
   final _cityService = CityService();
-  List<CityModel> _citys = [];
-  UnmodifiableListView<CityModel> get houses => UnmodifiableListView(_citys);
+
   Future<List<CityModel>> getCitysByState(String? sigla) async {
     return await _cityService.getCitysByState(sigla);
   }
