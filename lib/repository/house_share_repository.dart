@@ -1,4 +1,5 @@
 import 'package:app_alugar/model/house_share_model.dart';
+import 'package:app_alugar/model/user_model.dart';
 import 'package:app_alugar/repository/house_share_repository_interface.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -98,6 +99,15 @@ class HouseShareRepository implements IHouseShareRepository {
      return  querySnapshot.docs.map((e) {
        return HouseShareModel.fromSnapshot(e);
      }).toList();
+  }
+
+  @override
+  Future<List<UserModel>> findListInterested( String id) async {
+    DocumentSnapshot documentSnapshot = await _housesCollection
+        .doc(id)
+        .get();
+      HouseShareModel model =  HouseShareModel.fromSnapshot(documentSnapshot);
+      return [];
   }
 
 }

@@ -80,10 +80,11 @@ class _HouseListShareScreenState extends State<HouseListShareScreen> {
   }
 
   searchFireBase(String estado)  async {
-    if(estado!= "" ) {
-
+    if(estado!= ""  ) {
       _houseShareController.findByState(estado);
-     await cityController.getCitysByState(estado);
+      await cityController.getCitysByState(estado);
+    }else{
+
     }
 
   }

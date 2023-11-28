@@ -50,4 +50,8 @@ class HouseShareController extends ChangeNotifier {
   print("USER CASA - ${userHouses.length}");
   notifyListeners();
   }
+
+  findListInterested(String id){
+    _houseShareService.findListInterested(id);
+  }
 }

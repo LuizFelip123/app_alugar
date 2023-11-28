@@ -1,8 +1,10 @@
+import 'package:app_alugar/controller/user_controller.dart';
 import 'package:app_alugar/model/house_share_model.dart';
 import 'package:app_alugar/model/user_model.dart';
 import 'package:app_alugar/screen/user/login_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HouseScreen extends StatefulWidget {
   final HouseShareModel _houseModel;
@@ -94,101 +96,107 @@ class _HouseScreenState extends State<HouseScreen> {
                         ],
                       )
                     ,
-                !UserModel.of(context).isLoggedIn()
-                    ? ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context)
-                              .push(
-                            MaterialPageRoute(
-                              builder: (context) => LoginScreen(),
-                            ),
-                          )
-                              .then((_) {
-                            setState(() {});
-                          });
+                Consumer<UserController>( builder: (context, value, child) {
+                 if(!value.isLogin){
+                   return ElevatedButton(
+                     onPressed: () {
+                       Navigator.of(context)
+                           .push(
+                         MaterialPageRoute(
+                           builder: (context) => LoginScreen(),
+                         ),
+                       )
+                           .then((_) {
+                         setState(() {});
+                       });
 
-                        },
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.black),
-                        child: Text(
-                          "Realizar Login",
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                      )
-                    : ElevatedButton(
-                        onPressed: () async {
-                          final update = await widget._houseModel
-                              .addInterested(UserModel.of(context).uid());
-                          if (update) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text(
-                                  "Demonstração de Interesse realizado!",
-                                  style: TextStyle(color: Colors.white)),
-                              duration: Duration(
-                                seconds: 2,
-                              ),
-                              backgroundColor: Colors.black,
-                            ));
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text(
-                                  "Falha ao demonstrar interesse na casa!",
-                                  style: TextStyle(color: Colors.white)),
-                              duration: Duration(
-                                seconds: 2,
-                              ),
-                              backgroundColor: Colors.black,
-                            ));
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.black),
-                        child: Text(
-                          "Demonstrar interesse",
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
+                     },
+                     style: ElevatedButton.styleFrom(
+                         backgroundColor: Colors.black),
+                     child: Text(
+                       "Realizar Login",
+                       style: TextStyle(
+                         color: Colors.white,
+                       ),
+                     ),
+                   );
+                 }
+                 return  ElevatedButton(
+                   onPressed: () async {
+                     final update = await widget._houseModel
+                         .addInterested(UserModel.of(context).uid());
+                     if (update) {
+                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                         content: Text(
+                             "Demonstração de Interesse realizado!",
+                             style: TextStyle(color: Colors.white)),
+                         duration: Duration(
+                           seconds: 2,
+                         ),
+                         backgroundColor: Colors.black,
+                       ));
+                     } else {
+                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                         content: Text(
+                             "Falha ao demonstrar interesse na casa!",
+                             style: TextStyle(color: Colors.white)),
+                         duration: Duration(
+                           seconds: 2,
+                         ),
+                         backgroundColor: Colors.black,
+                       ));
+                     }
+                   },
+                   style: ElevatedButton.styleFrom(
+                       backgroundColor: Colors.black),
+                   child: Text(
+                     "Demonstrar interesse",
+                     style: TextStyle(
+                       color: Colors.white,
+                     ),
+                   ),
+                 );
+                },)
               ],
             ),
           ),
         ],
       ),
-      floatingActionButton: UserModel.of(context).isLoggedIn()
-          ? FloatingActionButton(
-              onPressed: ()async {
-                 bool value = await UserModel.of(context).addFavorite(widget._houseModel.cid!);
-                 print("Verificar o valor se adicionou : $value");
-                 if (value == true) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("Casa Adicionado nos Favoritos!",
-                          style: TextStyle(color: Colors.white)),
-                      duration: Duration(
-                        seconds: 2,
-                      ),
-                      backgroundColor: Colors.black,
-                    ));
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("Falha ao salvar casa!",
-                          style: TextStyle(color: Colors.white)),
-                      duration: Duration(
-                        seconds: 2,
-                      ),
-                      backgroundColor: Colors.black,
-                    ));
-                  }
-              },
-              backgroundColor: Colors.black,
-              child: Icon(
-                Icons.save,
-                color: Colors.white,
-              ),
-            )
-          : null,
+      floatingActionButton: Consumer<UserController>(builder: (context, value, child) {
+        if(value.isLogin){
+          return FloatingActionButton(
+            onPressed: ()async {
+              bool value = await UserModel.of(context).addFavorite(widget._houseModel.cid!);
+              print("Verificar o valor se adicionou : $value");
+              if (value == true) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("Casa Adicionado nos Favoritos!",
+                      style: TextStyle(color: Colors.white)),
+                  duration: Duration(
+                    seconds: 2,
+                  ),
+                  backgroundColor: Colors.black,
+                ));
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("Falha ao salvar casa!",
+                      style: TextStyle(color: Colors.white)),
+                  duration: Duration(
+                    seconds: 2,
+                  ),
+                  backgroundColor: Colors.black,
+                ));
+              }
+            },
+            backgroundColor: Colors.black,
+            child: Icon(
+              Icons.save,
+              color: Colors.white,
+            ),
+          );
+        }
+        return Container();
+      },)
     );
   }
 }

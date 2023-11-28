@@ -1,8 +1,10 @@
+import 'package:app_alugar/controller/house_share_controller.dart';
 import 'package:app_alugar/model/house_share_model.dart';
 import 'package:app_alugar/model/user_model.dart';
 import 'package:app_alugar/screen/titles/house_interested_title.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HouseInterestedScreen extends StatefulWidget {
   const HouseInterestedScreen({super.key});
@@ -26,31 +28,14 @@ class _HouseInterestedScreenState extends State<HouseInterestedScreen> {
       body: Column(
         children: [
           Expanded(
-            child: FutureBuilder<QuerySnapshot>(
-              future: FirebaseFirestore.instance
-                  .collection("houses")
-                  .where('user_id', isEqualTo: UserModel.of(context).uid(),)
-                  .get(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting ||
-                    snapshot.connectionState == ConnectionState.none) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                if (snapshot.hasError) {
+            child: Consumer<HouseShareController>(
+
+              builder: (context, houseShare, child) {
+
+                if (houseShare.userHouses.isEmpty ) {
                   return Center(
                     child: Text(
                       "Erro ao carregar os dados!",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  );
-                }
-                if (snapshot.data!.docs.isEmpty) {
-                  return Center(
-                    child: Text(
-                      "Não tem dados cadastrados!",
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
@@ -61,10 +46,10 @@ class _HouseInterestedScreenState extends State<HouseInterestedScreen> {
                   ListView.builder(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
-                    itemCount: snapshot.data!.docs.length,
+                    itemCount: houseShare.userHouses.length,
                     itemBuilder: (context, index) {
                       return HouseInterestedTitle(
-                        HouseShareModel.fromSnapshot(snapshot.data!.docs[index]),
+                        houseShare.userHouses[index],
                       );
                     },
                   )

@@ -1,4 +1,5 @@
 import 'package:app_alugar/model/house_share_model.dart';
+import 'package:app_alugar/model/user_model.dart';
 import 'package:app_alugar/repository/house_share_repository.dart';
 import 'package:app_alugar/service/state_service.dart';
 import 'package:app_alugar/service/user_service.dart';
@@ -22,5 +23,9 @@ class HouseShareService{
 
   Future <List<HouseShareModel>> findByUser() async{
     return await _houseShareRepository.findByUser(_userService.getUserId());
+  }
+
+  Future <List<UserModel>> findListInterested(String id)async {
+    return await _houseShareRepository.findListInterested( id);
   }
 }
