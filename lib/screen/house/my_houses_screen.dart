@@ -1,8 +1,8 @@
-import 'package:app_alugar/model/house_share_model.dart';
+import 'package:app_alugar/controller/house_share_controller.dart';
 import 'package:app_alugar/model/user_model.dart';
 import 'package:app_alugar/screen/titles/myhouse_title.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MyHousesScreen extends StatefulWidget {
   const MyHousesScreen({super.key});
@@ -12,7 +12,14 @@ class MyHousesScreen extends StatefulWidget {
 }
 
 class _MyHousesScreenState extends State<MyHousesScreen> {
-  List<HouseShareModel> _myHousModels = [];
+  HouseShareController houseShareController = HouseShareController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+     houseShareController = Provider.of<HouseShareController>(context, listen: false);
+    houseShareController.findByUser();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,28 +36,12 @@ class _MyHousesScreenState extends State<MyHousesScreen> {
       body: Column(
         children: [
           Expanded(
-            child: FutureBuilder<QuerySnapshot>(
-              future: FirebaseFirestore.instance
-                  .collection("houses")
-                  .where('user_id', isEqualTo: UserModel.of(context).uid())
-                  .get(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting ||
-                    snapshot.connectionState == ConnectionState.none) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                if (snapshot.hasError) {
-                  return Center(
-                    child: Text(
-                      "Erro ao carregar os dados!",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  );
-                }
-                if (snapshot.data!.docs.isEmpty) {
+            child: Consumer<HouseShareController>(
+
+              builder: (context, houseShare, child) {
+
+
+                if (houseShare.userHouses.isEmpty) {
                   return Center(
                     child: Text(
                       "Não tem dados cadastrados!",
@@ -64,12 +55,10 @@ class _MyHousesScreenState extends State<MyHousesScreen> {
                   ListView.builder(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
-                    itemCount: snapshot.data!.docs.length,
+                    itemCount: houseShare.userHouses.length,
                     itemBuilder: (context, index) {
-                      _myHousModels.add(
-                          HouseShareModel.fromSnapshot(snapshot.data!.docs[index]));
 
-                      return MyHouseTitle(_myHousModels[index], _delete);
+                      return MyHouseTitle(houseShare.userHouses[index], _delete);
                     },
                   )
                 ]);
@@ -85,8 +74,7 @@ class _MyHousesScreenState extends State<MyHousesScreen> {
     await UserModel.of(context).deleteHouse(_houseModel.cid, _houseModel.imgsLink);
 
     setState(() {
-      _myHousModels.remove(_houseModel);
-      _myHousModels;
+
     });
   }
 }

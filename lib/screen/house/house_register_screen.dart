@@ -49,7 +49,7 @@ class _HouseRegisterScreenState extends State<HouseRegisterScreen> {
   void initState() {
     // TODO: implement initState
     houseShareController =  Provider.of<HouseShareController>(context, listen: false);
-    stateController.getStates().then((value) {
+    stateController.getAll().then((value) {
       _estados = value;
       for (int i = 0; i < _estados!.length; i++) {
         menuEstados.add(DropdownMenuItem(

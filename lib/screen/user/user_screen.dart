@@ -246,7 +246,7 @@ class _UserScreenState extends State<UserScreen> {
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => UserEditScreen(UserModel.of(context)),
+                                builder: (context) => UserEditScreen(),
                               ),
                             );
                           },

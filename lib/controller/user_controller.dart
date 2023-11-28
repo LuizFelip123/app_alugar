@@ -7,27 +7,27 @@ import 'package:flutter/material.dart';
 
 class UserController extends ChangeNotifier {
   final UserService _userService = UserService();
-  final _userModel = UserModel();
+  UserModel _userModel = UserModel();
   bool isLogin = false;
-  UserModel get userModal => _userModel;
+  UserModel get userModel => _userModel;
   Future signin(
       {required String email,
       required String pass,
       required VoidCallback onSuccess,
       required VoidCallback onFail}) async {
-    _userModel.isLoading = true;
+    userModel.isLoading = true;
     try {
-      _userModel.user = await _userService.signin(
+      userModel.user = await _userService.signin(
           email: email, pass: pass, onSuccess: onSuccess, onFail: onFail);
 
-      await _userModel.loadCurrentUser();
+      await userModel.loadCurrentUser();
 
       onSuccess();
       isLogin = true;
-      _userModel.isLoading = false;
+      userModel.isLoading = false;
       notifyListeners();
     } catch (e) {
-      _userModel.isLoading = false;
+      userModel.isLoading = false;
       isLogin = false;
       onFail();
     }
@@ -35,8 +35,10 @@ class UserController extends ChangeNotifier {
   }
   signOut(){
     isLogin = false;
-    _userService.signOut(_userModel);
+    _userService.signOut(userModel);
     notifyListeners();
   }
-
+  Future<UserModel> getUserLoggin() async{
+  return await _userService.getUserLoggin();
+  }
 }

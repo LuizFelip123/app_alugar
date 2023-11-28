@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 
 class StateController extends ChangeNotifier {
    final _stateService = StateService();
-    Future<List<StateModel>> getStates() async {
+
+    Future<List<StateModel>> getAll() async {
     return  await _stateService.getStates();
     }
 }

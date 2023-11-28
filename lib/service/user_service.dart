@@ -46,5 +46,7 @@ class UserService {
     User? user = _auth.currentUser;
     return user?.uid;
   }
-
+ Future<UserModel> getUserLoggin() async{
+  return await _userRepository.get(_auth.currentUser!.uid);
+  }
 }

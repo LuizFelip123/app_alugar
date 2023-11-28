@@ -69,7 +69,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                               Padding(
                                   padding: EdgeInsets.only(left: 8.0),
                                   child: Text(
-                                    "Olá, ${userController.isLogin ? userController.userModal.userData['name'] : ""}",
+                                    "Olá, ${userController.isLogin ? userController.userModel.userData['name'] : ""}",
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
@@ -79,7 +79,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: GestureDetector(
                                   onTap: () {
-                                    if (!userController.userModal.isLoggedIn()) {
+                                    if (!userController.userModel.isLoggedIn()) {
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: (context) =>
@@ -87,7 +87,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                     }
                                   },
                                   child: Text(
-                                    !  userController.userModal.isLoggedIn()
+                                    !  userController.userModel.isLoggedIn()
                                         ? "Cadastre-se ou entre na sua conta"
                                         : "",
                                     style: TextStyle(

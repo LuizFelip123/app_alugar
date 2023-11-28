@@ -14,9 +14,11 @@ class UserRepository  implements IUserRepository {
   }
 
   @override
-  Future<UserModel> get(String id) {
-    // TODO: implement get
-    throw UnimplementedError();
+  Future<UserModel> get(String id) async {
+   DocumentSnapshot snapshot = await  FirebaseFirestore.instance
+        .collection("users")
+        .doc(id).get();
+  return UserModel.fromDocumentSnapshot(snapshot);
   }
 
   @override

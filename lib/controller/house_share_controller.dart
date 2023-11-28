@@ -6,9 +6,10 @@ import 'package:flutter/material.dart';
 
 class HouseShareController extends ChangeNotifier {
   final _houseShareService = HouseShareService();
-
+    String state = "";
     List<HouseShareModel> houses = [];
     List<HouseShareModel> findHouse = [];
+    List<HouseShareModel> userHouses = [];
     bool  find = false;
    Future<void> getAllHouseShare() async {
     houses = await  _houseShareService.getAllHouseShareModel();
@@ -22,9 +23,12 @@ class HouseShareController extends ChangeNotifier {
   findByState (String text ) async  {
       print(text);
      if(text == "Nenhum"){
+       getAllHouseShare();
+       findHouse = [];
        find = false;
        notifyListeners();
      }else{
+       state = text;
      findHouse = await  _houseShareService.findByState(text);
        houses = [];
        find = true;
@@ -36,5 +40,14 @@ class HouseShareController extends ChangeNotifier {
 
 
    }
-
+  findByCity(String city, String state) async{
+   findHouse = await _houseShareService.findByCity(city, state);
+   print("TAMANHO DA LISTA - ${findHouse.length}");
+   notifyListeners();
+   }
+  findByUser() async {
+  userHouses =  await _houseShareService.findByUser();
+  print("USER CASA - ${userHouses.length}");
+  notifyListeners();
+  }
 }

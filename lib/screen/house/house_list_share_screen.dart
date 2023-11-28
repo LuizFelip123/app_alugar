@@ -1,34 +1,38 @@
+import 'package:app_alugar/controller/city_controller.dart';
 import 'package:app_alugar/controller/house_share_controller.dart';
+import 'package:app_alugar/controller/state_controller.dart';
 import 'package:app_alugar/model/house_share_model.dart';
 import 'package:app_alugar/screen/titles/house_title.dart';
 import 'package:app_alugar/screen/widgets/custom_barra.dart';
+
 import 'package:app_alugar/screen/widgets/custom_select.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class HouseListShareScreen extends StatefulWidget {
-  late HouseShareController _houseShareController = HouseShareController();
 
-  HouseListShareScreen({super.key});
+
+  const HouseListShareScreen({super.key});
 
   @override
   State<HouseListShareScreen> createState() => _HouseListShareScreenState();
 }
 
 class _HouseListShareScreenState extends State<HouseListShareScreen> {
-  String search = "";
+  String state ="";
+  HouseShareController _houseShareController = HouseShareController();
+  final cityController = CityController();
 
   @override
   void initState() {
     super.initState();
-    widget._houseShareController =
-        Provider.of<HouseShareController>(context, listen: false);
+    _houseShareController = Provider.of<HouseShareController>(context, listen: false);
     _loadHouses();
   }
 
   _loadHouses() async {
-    await widget._houseShareController.getAllHouseShare();
+    await _houseShareController.getAllHouseShare();
   }
 
   @override
@@ -37,16 +41,10 @@ class _HouseListShareScreenState extends State<HouseListShareScreen> {
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: CustomSelect(name: "Estado", search: searchFireBase),
+          child: CustomSelect(name: "Estado", search: searchFireBase, searchCity: searchCity,),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: CustomSelect(
-            name: "Cidade",
-            search: searchFireBase,
-          ),
-        ),
-        Padding(padding: EdgeInsets.only(top: 20)),
+
+        const Padding(padding: EdgeInsets.only(top: 20)),
         Consumer<HouseShareController>(builder: (context, houseShare, child) {
 
 
@@ -59,7 +57,7 @@ class _HouseListShareScreenState extends State<HouseListShareScreen> {
           if (houseShare.find != true) {
             return ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: houseShare.houses.length,
               itemBuilder: (_, index) {
                 return HouseTitle(houseShare.houses[index]);
@@ -81,10 +79,21 @@ class _HouseListShareScreenState extends State<HouseListShareScreen> {
     );
   }
 
-  searchFireBase(String estado, {String? cidade})  {
-    if(estado!= "Nenhum" && estado!= "" ) {
-      widget._houseShareController.findByState(estado);
+  searchFireBase(String estado)  async {
+    if(estado!= "" ) {
 
+      _houseShareController.findByState(estado);
+     await cityController.getCitysByState(estado);
     }
+
   }
+
+  searchCity(String estado, String city)  {
+
+
+      _houseShareController.findByCity(city, estado);
+
+
+  }
+
 }

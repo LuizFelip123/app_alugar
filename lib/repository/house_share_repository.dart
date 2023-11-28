@@ -81,4 +81,23 @@ class HouseShareRepository implements IHouseShareRepository {
       }).toList();
 
     }
+
+  @override
+  Future<List<HouseShareModel>> findByCity(String city, String state) async {
+
+    QuerySnapshot querySnapshot =    await _housesCollection.orderBy("valor", descending: false).where("estado", isEqualTo: state).where("cidade", isEqualTo: city).get();
+    return  querySnapshot.docs.map((e) {
+      return HouseShareModel.fromSnapshot(e);
+    }).toList();
+  }
+
+  @override
+  Future<List<HouseShareModel>> findByUser( String? idUser) async{
+    QuerySnapshot querySnapshot =  await _housesCollection.where('user_id', isEqualTo: idUser)
+                       .get();
+     return  querySnapshot.docs.map((e) {
+       return HouseShareModel.fromSnapshot(e);
+     }).toList();
+  }
+
 }

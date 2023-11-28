@@ -68,7 +68,7 @@ class _HouseFavoriteListState extends State<HouseFavoriteList> {
     )
         : Column(
       children: [
-        widget.userController.userModal.favorites.length == 0
+        widget.userController.userModel.favorites.length == 0
             ? Center(
           child: Text(
             "Não há Casas Salvas",
@@ -78,10 +78,10 @@ class _HouseFavoriteListState extends State<HouseFavoriteList> {
           ),
         )
             : ListView.builder(
-          itemCount: widget.userController.userModal.favorites.length,
+          itemCount: widget.userController.userModel.favorites.length,
           itemBuilder: (context, index) {
             return FavoriteTitle(
-                widget.userController.userModal.favorites[index]);
+                widget.userController.userModel.favorites[index]);
           },
         ),
       ],

@@ -1,25 +1,26 @@
+import 'package:app_alugar/controller/user_controller.dart';
 import 'package:app_alugar/model/user_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class UserEditScreen extends StatefulWidget {
-  final UserModel _userModel;
-  UserEditScreen(this._userModel);
+
 
   @override
   State<UserEditScreen> createState() => _UserEditScreenState();
 }
 
 class _UserEditScreenState extends State<UserEditScreen> {
+
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
-  final _passController = TextEditingController();
+
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
-    _nameController.text = widget._userModel.userData["name"];
-    _emailController.text = widget._userModel.userData["email"];
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +32,11 @@ class _UserEditScreenState extends State<UserEditScreen> {
           centerTitle: true),
       body: ListView(
         children: [
-          Form(
+      Consumer<UserController>(builder: (context, userController, child)  {
+
+        _nameController.text =  userController.userModel.userData['name'] ;
+        _emailController.text = userController.userModel.userData['email'];
+        return Form(
               child: Column(
             children: [
               Padding(
@@ -82,13 +87,13 @@ class _UserEditScreenState extends State<UserEditScreen> {
                 ),
               ),
             ],
-          )),
+          ),
+          );}),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: ElevatedButton(
               onPressed: () {
-                UserModel.of(context)
-                    .updateUser(_emailController.text, _nameController.text);
+
                 Navigator.of(context).pop();
               },
               child: Text(

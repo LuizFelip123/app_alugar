@@ -7,4 +7,6 @@ abstract class IHouseShareRepository{
   Future update(HouseShareModel houseShareModel);
   Future<List<HouseShareModel>> getAll();
   Future<List<HouseShareModel>> findByState(String text);
+  Future<List<HouseShareModel>> findByCity(String city, String state);
+  Future<List<HouseShareModel>> findByUser( String? idUser);
 }

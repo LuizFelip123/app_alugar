@@ -1,3 +1,5 @@
+
+import 'package:app_alugar/controller/city_controller.dart';
 import 'package:app_alugar/controller/house_share_controller.dart';
 import 'package:app_alugar/controller/user_controller.dart';
 import 'package:app_alugar/model/house_share_model.dart';
@@ -20,6 +22,7 @@ void main() async {
       ChangeNotifierProvider<UserController>(
         create: (context) => UserController(),
       ),
+      ChangeNotifierProvider<CityController>(create: (context)=>CityController())
     ],
     child: MyApp(),
   ));

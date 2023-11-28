@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: ListView(
         children: [
      Consumer<UserController>(builder: (context, userController, child) {
-            if (userController.userModal.isLoading)
+            if (userController.userModel.isLoading)
               return Padding(
                 padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height/3),
                 child: Center(
