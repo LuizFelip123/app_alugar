@@ -42,12 +42,12 @@ class HouseShareController extends ChangeNotifier {
    }
   findByCity(String city, String state) async{
    findHouse = await _houseShareService.findByCity(city, state);
-   print("TAMANHO DA LISTA - ${findHouse.length}");
+
    notifyListeners();
    }
   findByUser() async {
   userHouses =  await _houseShareService.findByUser();
-  print("USER CASA - ${userHouses.length}");
+
   notifyListeners();
   }
 

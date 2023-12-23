@@ -7,7 +7,6 @@ import 'package:app_alugar/service/user_service.dart';
 class HouseShareService{
   final _houseShareRepository = HouseShareRepository();
   final _userService = UserService();
-  final _stateService = StateService();
   Future<List<HouseShareModel>> getAllHouseShareModel () async{
     return await _houseShareRepository.getAll();
   }  
@@ -26,6 +25,11 @@ class HouseShareService{
   }
 
   Future <List<UserModel>> findListInterested(String id)async {
-    return await _houseShareRepository.findListInterested( id);
+    final house =  await _houseShareRepository.get(id);
+
+    return [];
+  }
+  Future<HouseShareModel> findHouseShareModel(String id) async{
+    return await _houseShareRepository.get(id);
   }
 }

@@ -39,8 +39,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
               return ListView(
                 children: [
                   Container(
-                    margin: EdgeInsets.only(bottom: 8.0),
-                    padding: EdgeInsets.fromLTRB(
+                    margin: const EdgeInsets.only(bottom: 8.0),
+                    padding: const EdgeInsets.fromLTRB(
                       0.0,
                       16.0,
                       16.0,
@@ -70,7 +70,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                   padding: EdgeInsets.only(left: 8.0),
                                   child: Text(
                                     "Olá, ${userController.isLogin ? userController.userModel.userData['name'] : ""}",
-                                    style: TextStyle(
+                                    style:const TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white),
@@ -79,7 +79,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: GestureDetector(
                                   onTap: () {
-                                    if (!userController.userModel.isLoggedIn()) {
+                                    if (!userController.isLogin) {
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: (context) =>
@@ -87,10 +87,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                     }
                                   },
                                   child: Text(
-                                    !  userController.userModel.isLoggedIn()
+                                    !  userController.isLogin
                                         ? "Cadastre-se ou entre na sua conta"
                                         : "",
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.white,
                                     ),
                                   ),
@@ -102,7 +102,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                       ],
                     ),
                   ),
-                  Divider(),
+                const Divider(),
                   DrawerTile(
                     icon: Icons.home,
                     text: "Início",

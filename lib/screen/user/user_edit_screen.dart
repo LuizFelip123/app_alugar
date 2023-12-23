@@ -15,11 +15,12 @@ class _UserEditScreenState extends State<UserEditScreen> {
 
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
-
+  UserController _userController = UserController();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _userController = Provider.of<UserController>(context, listen: false);
   }
   @override
   Widget build(BuildContext context) {
@@ -45,8 +46,8 @@ class _UserEditScreenState extends State<UserEditScreen> {
                   children: [
                     TextFormField(
                       controller: _nameController,
-                      style: TextStyle(color: Colors.black),
-                      decoration: InputDecoration(
+                      style: const TextStyle(color: Colors.black),
+                      decoration:const InputDecoration(
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
                               width: 2,
@@ -62,12 +63,12 @@ class _UserEditScreenState extends State<UserEditScreen> {
                     TextFormField(
                       validator: (text) {
                         if (text!.isEmpty || !text.contains("@"))
-                          return "Email inválido";
+                          return  "Email inválido";
                       },
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
-                      style: TextStyle(color: Colors.black),
-                      decoration: InputDecoration(
+                      style:const  TextStyle(color: Colors.black),
+                      decoration: const InputDecoration(
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
                               width: 2,
@@ -80,7 +81,7 @@ class _UserEditScreenState extends State<UserEditScreen> {
                           ),
                           focusColor: Colors.black),
                     ),
-                    SizedBox(
+                  const  SizedBox(
                       height: 20,
                     ),
                   ],
@@ -93,10 +94,10 @@ class _UserEditScreenState extends State<UserEditScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: ElevatedButton(
               onPressed: () {
-
+                 _userController.update(_nameController.text, _emailController.text, );
                 Navigator.of(context).pop();
               },
-              child: Text(
+              child: const Text(
                 "Editar",
                 style: TextStyle(
                     color: Colors.white,

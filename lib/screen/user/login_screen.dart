@@ -7,11 +7,12 @@ import 'package:provider/provider.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class LoginScreen extends StatefulWidget {
-  UserController  userController = UserController();
+
   State<LoginScreen> createState() => _LoginScreenState();
 }
  
 class _LoginScreenState extends State<LoginScreen> {
+  UserController  _userController = UserController();
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
 
@@ -19,14 +20,14 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-      widget.userController   = Provider.of<UserController>(context, listen: false);
+      _userController   = Provider.of<UserController>(context, listen: false);
 
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Tela de Login",
           style: TextStyle(
             color: Colors.black,
@@ -56,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
+                     const Icon(
                         Icons.person,
                         size: 100,
                         color: Colors.black,
@@ -66,15 +67,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: ElevatedButton(
                           onPressed: () async{
-                           await widget.userController.signin(
+                           await _userController.signin(
                                 email: _emailController.text,
                                 pass: _passController.text,
                                 onSuccess: _onSuccess,
                                 onFail: _onFail);
                           },
-                          child: Text(
+                          child: const  Text(
                             "Login",
-                            style: TextStyle(
+                            style:  TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16),
@@ -104,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => SignupScreen()));
                         },
-                        child: Text(
+                        child: const Text(
                           "Cadastrar-se",
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -133,17 +134,17 @@ class _LoginScreenState extends State<LoginScreen> {
             TextFormField(
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(label: Text("Email")),
+              decoration: const InputDecoration(label: Text("Email")),
             ),
-            SizedBox(
+           const SizedBox(
               height: 20,
             ),
             TextFormField(
               controller: _passController,
               obscureText: true,
-              decoration: InputDecoration(label: Text("Senha")),
+              decoration: const InputDecoration(label: Text("Senha")),
             ),
-            SizedBox(
+           const SizedBox(
               height: 20,
             ),
           ],
@@ -157,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
  
   void _onFail() {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(  SnackBar(
       content: Text("Falha ao Entrar!", style: TextStyle(color: Colors.white)),
       duration: Duration(
         seconds: 2,

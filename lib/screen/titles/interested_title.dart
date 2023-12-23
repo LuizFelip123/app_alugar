@@ -33,12 +33,12 @@ class InterestedTitle extends StatelessWidget {
                   size: 35,
                 ),
               ),
-              SizedBox(
+             const SizedBox(
                 width: 9,
               ),
               Text(
-                _userModel.name!,
-                style: TextStyle(
+                _userModel.userData["name"]!,
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -46,7 +46,7 @@ class InterestedTitle extends StatelessWidget {
               ),
             ],
           )),
-          SizedBox(
+          const SizedBox(
             width: 9,
           ),
           CupertinoButton(
@@ -62,9 +62,9 @@ class InterestedTitle extends StatelessWidget {
 
               final Uri emailLaunchUri  = Uri(
                 scheme: 'mailto',
-                path:_userModel.email,
+                path:_userModel.userData["email"],
                 query: encodeQueryParameters(<String, String>{
-                  'Subject': 'Casa para Alugar',
+                  'Subject': 'Casa para Alugar - Aluga House',
                 }),
               );
                launchUrl(emailLaunchUri);

@@ -14,9 +14,12 @@ class HouseShareRepository implements IHouseShareRepository {
   }
 
   @override
-  Future<HouseShareModel> get(String id) {
-    // TODO: implement get
-    throw UnimplementedError();
+  Future<HouseShareModel> get(String id) async {
+    DocumentSnapshot documentSnapshot = await _housesCollection
+        .doc(id)
+        .get();
+   return HouseShareModel.fromSnapshot(documentSnapshot);
+
   }
 
   @override
@@ -101,13 +104,6 @@ class HouseShareRepository implements IHouseShareRepository {
      }).toList();
   }
 
-  @override
-  Future<List<UserModel>> findListInterested( String id) async {
-    DocumentSnapshot documentSnapshot = await _housesCollection
-        .doc(id)
-        .get();
-      HouseShareModel model =  HouseShareModel.fromSnapshot(documentSnapshot);
-      return [];
-  }
+
 
 }

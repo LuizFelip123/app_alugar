@@ -20,7 +20,7 @@ class _SignupScreenState extends State<SignupScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Cadastrar",
           style: TextStyle(
             color: Colors.black,
@@ -48,7 +48,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
+                     const Icon(
                         Icons.person,
                         size: 100,
                         color: Colors.black,
@@ -61,6 +61,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             Map<String, dynamic> userData = {
                               "name": _nameController.text,
                               "email": _emailController.text,
+                              "favorite":[],
                               "interested": []
                             };
                             model.signup(
@@ -69,9 +70,9 @@ class _SignupScreenState extends State<SignupScreen> {
                                 onSuccess: _onSuccess,
                                 onFail: _onFail);
                           },
-                          child: Text(
+                          child:  Text(
                             "Cadastrar",
-                            style: TextStyle(
+                            style:   TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16),

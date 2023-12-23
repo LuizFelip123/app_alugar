@@ -25,7 +25,7 @@ class _MyHousesScreenState extends State<MyHousesScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title:const Text(
           "Minhas Casas",
           style: TextStyle(
             color: Colors.black,
@@ -42,7 +42,7 @@ class _MyHousesScreenState extends State<MyHousesScreen> {
 
 
                 if (houseShare.userHouses.isEmpty) {
-                  return Center(
+                  return const Center(
                     child: Text(
                       "Não tem dados cadastrados!",
                       style:
@@ -51,10 +51,10 @@ class _MyHousesScreenState extends State<MyHousesScreen> {
                   );
                 }
                 return ListView(children: [
-                  Padding(padding: EdgeInsets.only(top: 20)),
+                  const Padding(padding: EdgeInsets.only(top: 20)),
                   ListView.builder(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: houseShare.userHouses.length,
                     itemBuilder: (context, index) {
 

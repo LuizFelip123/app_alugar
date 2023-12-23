@@ -33,20 +33,20 @@ class _UserScreenState extends State<UserScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Icon(
+              const  Icon(
                   Icons.highlight_remove_sharp,
                   color: Colors.black,
                   size: 80.0,
                 ),
-                SizedBox(
+               const SizedBox(
                   height: 16.0,
                 ),
-                Text(
+               const Text(
                   "Para usar a tela do usuário é necessário realizar o login!",
                   style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(
+              const  SizedBox(
                   height: 16.0,
                 ),
                 ElevatedButton(
@@ -59,7 +59,7 @@ class _UserScreenState extends State<UserScreen> {
                       });
                       ;
                     },
-                    child: Text(
+                    child: const Text(
                       "Login",
                       style: TextStyle(
                           color: Colors.black, fontWeight: FontWeight.bold),
@@ -76,7 +76,7 @@ class _UserScreenState extends State<UserScreen> {
                 children: [
                   Padding(
                     padding:
-                        const EdgeInsets.only(top: 20, left: 20, right: 20),
+                        const EdgeInsets.only(top: 20, ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -101,13 +101,13 @@ class _UserScreenState extends State<UserScreen> {
                                       Offset(0, 3), // deslocamento da sombra
                                 ),
                               ],
-                              gradient: LinearGradient(
+                              gradient: const LinearGradient(
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
                                 colors: [Color(0xFF58126b), Color(0xFFF9C3587)],
                               ),
                             ),
-                            child: Center(
+                            child: const Center(
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -127,14 +127,14 @@ class _UserScreenState extends State<UserScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                       const SizedBox(
                           width: 7,
                         ),
                         GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => MyHousesScreen(),
+                                builder: (context) => const MyHousesScreen(),
                               ),
                             );
                           },
@@ -152,13 +152,13 @@ class _UserScreenState extends State<UserScreen> {
                                       Offset(0, 3), // deslocamento da sombra
                                 ),
                               ],
-                              gradient: LinearGradient(
+                              gradient:const LinearGradient(
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
-                                colors: [Color(0xFF58126b), Color(0xFFF9C3587)],
+                                colors: [Color(0xFF58126b),  Color(0xFFF9C3587)],
                               ),
                             ),
-                            child: Center(
+                            child: const Center(
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -188,7 +188,7 @@ class _UserScreenState extends State<UserScreen> {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsets.only(top: 20, left: 20, right: 20),
+                        const EdgeInsets.only(top: 20,  ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -196,7 +196,7 @@ class _UserScreenState extends State<UserScreen> {
                         GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => HouseInterestedScreen(),
+                              builder: (context) => const HouseInterestedScreen(),
                             ));
                           },
                           child: Container(
@@ -213,13 +213,13 @@ class _UserScreenState extends State<UserScreen> {
                                       Offset(0, 3), // deslocamento da sombra
                                 ),
                               ],
-                              gradient: LinearGradient(
+                              gradient: const LinearGradient(
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
                                 colors: [Color(0xFF58126b), Color(0xFFF9C3587)],
                               ),
                             ),
-                            child: Center(
+                            child: const Center(
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -239,7 +239,7 @@ class _UserScreenState extends State<UserScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                       const SizedBox(
                           width: 7,
                         ),
                         GestureDetector(
@@ -264,13 +264,13 @@ class _UserScreenState extends State<UserScreen> {
                                       Offset(0, 3), // deslocamento da sombra
                                 ),
                               ],
-                              gradient: LinearGradient(
+                              gradient: const LinearGradient(
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
                                 colors: [Color(0xFF58126b), Color(0xFFF9C3587)],
                               ),
                             ),
-                            child: Center(
+                            child: const Center(
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [

@@ -1,7 +1,11 @@
+
+
+import 'package:app_alugar/controller/user_controller.dart';
 import 'package:app_alugar/model/user_model.dart';
 import 'package:app_alugar/screen/house/house_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class FavoriteTitle extends StatelessWidget {
   final  _houseModel;
@@ -10,7 +14,10 @@ class FavoriteTitle extends StatelessWidget {
   );
   @override
   Widget build(BuildContext context) {
-    final row = SafeArea(
+    final userController = Provider.of<UserController>(context, listen: false);
+
+
+  final row = SafeArea(
       top: false,
       bottom: false,
       minimum: const EdgeInsets.only(
@@ -56,7 +63,7 @@ class FavoriteTitle extends StatelessWidget {
           CupertinoButton(
             padding: EdgeInsets.zero,
             onPressed: () {
-              UserModel.of(context).removeFavorite(_houseModel);
+                  userController.deleteFavorite(_houseModel);
             },
             child: const Icon(
               CupertinoIcons.delete,
@@ -64,7 +71,7 @@ class FavoriteTitle extends StatelessWidget {
               color: Colors.red,
             ),
           ),
-          SizedBox(
+         const SizedBox(
             width: 7,
           ),
           CupertinoButton(

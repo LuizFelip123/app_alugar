@@ -17,8 +17,13 @@ class UserModel extends Model {
   static UserModel of(BuildContext context) =>
       ScopedModel.of<UserModel>(context);
   UserModel.fromDocumentSnapshot(DocumentSnapshot documentSnapshot) {
-    _name = documentSnapshot["name"];
-    _email = documentSnapshot["email"];
+    userData["name"] = documentSnapshot["name"];
+    print(documentSnapshot["name"]);
+    userData["email"] = documentSnapshot["email"];
+    print(documentSnapshot["email"]);
+    favorites.clear();
+    userData["favorite"] = documentSnapshot['favorite'];
+    print(userData["favorite"]);
   }
 
    Map<String, dynamic> toMap() {
@@ -30,10 +35,11 @@ class UserModel extends Model {
   }
 
   UserModel();
-  User? get user => _user;
+
   set user (User? user) {
     _user = user;
   }
+  User? get user => _user;
   String? get name => _name;
   String? get email => _email;
   void signup(
@@ -115,27 +121,30 @@ class UserModel extends Model {
   }
 
   Future loadCurrentUser() async {
+  print("CAIU AQUI -${_user}");
     if (_user == null) {
       _user == _auth.currentUser;
     }
     if (_user != null) {
+     print(userData["name"]);
       if (userData["name"] == null) {
         DocumentSnapshot docUser = await FirebaseFirestore.instance
             .collection("users")
             .doc(_user!.uid)
-            .get(); 
+            .get();
         userData["name"] = docUser["name"];
         userData["email"] = docUser["email"];
-       print(userData["name"]);
-       print(userData["email"]);
+        print("---------------");
+        print(userData["name"]);
+        print(userData["email"]);
+        print(docUser["favorite"]);
+        print("---------------");
         favorites.clear();
-        for (var element in docUser['favorite']) {
-          await HouseShareModel.findById(element).then((value) {
-            favorites.add(value);
-          });
-        }
+    // fazer busca pelo favorites do usuários
       }
+
     }
+    print("${favorites.length } Tamnaho da lista de favorites");
     notifyListeners();
   }
 

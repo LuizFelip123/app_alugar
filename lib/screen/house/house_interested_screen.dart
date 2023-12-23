@@ -1,8 +1,7 @@
 import 'package:app_alugar/controller/house_share_controller.dart';
-import 'package:app_alugar/model/house_share_model.dart';
-import 'package:app_alugar/model/user_model.dart';
+
 import 'package:app_alugar/screen/titles/house_interested_title.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -33,7 +32,7 @@ class _HouseInterestedScreenState extends State<HouseInterestedScreen> {
               builder: (context, houseShare, child) {
 
                 if (houseShare.userHouses.isEmpty ) {
-                  return Center(
+                  return const  Center(
                     child: Text(
                       "Erro ao carregar os dados!",
                       style:
@@ -42,10 +41,10 @@ class _HouseInterestedScreenState extends State<HouseInterestedScreen> {
                   );
                 }
                 return ListView(children: [
-                  Padding(padding: EdgeInsets.only(top: 20)),
+                const Padding(padding: EdgeInsets.only(top: 20)),
                   ListView.builder(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: houseShare.userHouses.length,
                     itemBuilder: (context, index) {
                       return HouseInterestedTitle(

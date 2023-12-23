@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:app_alugar/controller/user_controller.dart';
 import 'package:app_alugar/model/house_share_model.dart';
 import 'package:app_alugar/model/user_model.dart';
@@ -64,17 +66,17 @@ class _HouseScreenState extends State<HouseScreen> {
                 ),
                 Text(
                   "Valor de Aluguel: R\$ ${widget._houseModel.valor!.toStringAsFixed(2).replaceAll('.', ",")}",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                 ),
-                SizedBox(
+               const  SizedBox(
                   height: 10.0,
                 ),
                 Text(widget._houseModel.descricao!),
-                SizedBox(
+               const SizedBox(
                   height: 18.0,
                 ),
 
@@ -84,20 +86,20 @@ class _HouseScreenState extends State<HouseScreen> {
                           Text(
                             "Apenas : " + widget._houseModel!.generoConvivente!,
                           ),
-                          SizedBox(
+                         const  SizedBox(
                             height: 10.0,
                           ),
                           Text(
                             "vagas : " + widget._houseModel!.quant.toString(),
                           ),
-                          SizedBox(
+                         const SizedBox(
                             height: 10.0,
                           ),
                         ],
                       )
                     ,
-                Consumer<UserController>( builder: (context, value, child) {
-                 if(!value.isLogin){
+                Consumer<UserController>( builder: (context, userController, child) {
+                 if(!userController.isLogin){
                    return ElevatedButton(
                      onPressed: () {
                        Navigator.of(context)
@@ -113,7 +115,7 @@ class _HouseScreenState extends State<HouseScreen> {
                      },
                      style: ElevatedButton.styleFrom(
                          backgroundColor: Colors.black),
-                     child: Text(
+                     child: const Text(
                        "Realizar Login",
                        style: TextStyle(
                          color: Colors.white,
@@ -123,10 +125,10 @@ class _HouseScreenState extends State<HouseScreen> {
                  }
                  return  ElevatedButton(
                    onPressed: () async {
-                     final update = await widget._houseModel
-                         .addInterested(UserModel.of(context).uid());
-                     if (update) {
-                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                     final update = await
+                     userController.addInterested(widget._houseModel);
+                       if (update) {
+                    ScaffoldMessenger.of(context).showSnackBar( const SnackBar(
                          content: Text(
                              "Demonstração de Interesse realizado!",
                              style: TextStyle(color: Colors.white)),
@@ -136,7 +138,7 @@ class _HouseScreenState extends State<HouseScreen> {
                          backgroundColor: Colors.black,
                        ));
                      } else {
-                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                          content: Text(
                              "Falha ao demonstrar interesse na casa!",
                              style: TextStyle(color: Colors.white)),
@@ -149,7 +151,7 @@ class _HouseScreenState extends State<HouseScreen> {
                    },
                    style: ElevatedButton.styleFrom(
                        backgroundColor: Colors.black),
-                   child: Text(
+                   child: const Text(
                      "Demonstrar interesse",
                      style: TextStyle(
                        color: Colors.white,
@@ -162,11 +164,12 @@ class _HouseScreenState extends State<HouseScreen> {
           ),
         ],
       ),
-      floatingActionButton: Consumer<UserController>(builder: (context, value, child) {
-        if(value.isLogin){
+      floatingActionButton: Consumer<UserController>(builder: (context, controller, child) {
+        if(controller.isLogin){
           return FloatingActionButton(
-            onPressed: ()async {
-              bool value = await UserModel.of(context).addFavorite(widget._houseModel.cid!);
+            onPressed: () {
+             controller.addFavorite(widget._houseModel);
+              bool value = false;
               print("Verificar o valor se adicionou : $value");
               if (value == true) {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
